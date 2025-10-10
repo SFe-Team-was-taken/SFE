@@ -12,7 +12,7 @@ Our code of conduct is very simple, but please read it before contributing.
 
 ### Be respectful
 
-**Please be respectful to other people and other projects.** Don't harass other projects because of disagreements, or for any other reason. Hate speech, racism, homophobia, transphobia, etc. isn't tolerated.
+**Please be respectful to other people and other projects.** Don't harass other projects because of disagreements, or for any other reason. Hate speech, racism, homophobia, transphobia, etc. isn't tolerated. If you contribute to other projects, you must follow their terms of service and code of conduct.
 
 ### Work constructively
 
