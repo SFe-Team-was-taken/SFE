@@ -482,7 +482,7 @@ Containerised sample data structure modes use containerisation, which is where e
 
 Such containers include information such as sample rate, bit depth, compression format used, audio information and more. These are already used by the earlier [Werner SF3](https://github.com/FluidSynth/fluidsynth/wiki/SoundFont3Format) system widely used by the open source community, to store information about compression that a Werner SF3-compatible player could use to decompress the sample.
 
-Containerised modes provide many other advantages such as variable bit depths, conserving sample quality while reducing wasted space, and detailed sample data can also be included directly. Because of said advantages, containerised samples are mandatory for all samples except for uncompressed samples. (since 4.0.22)
+Containerised modes provide many other advantages such as variable bit depths, conserving sample quality while reducing wasted space, and detailed sample data can also be included directly. Because of said advantages, non-containerised samples may only be used for basic, uncompressed samples. (since 4.0.29)
 
 Please note that the sm24 sub-chunk is not used in containerised samples. (since 4.0.22)
 

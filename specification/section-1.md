@@ -13,6 +13,7 @@ The SFe standard has been created to provide a successor to E-mu Systems®'s Sou
 
 | Revision | Date              | Description                                                                                                                           |
 |----------|-------------------|---------------------------------------------------------------------------------------------------------------------------------------|
+| 4.0.29   | 23 October 2025   | Further containerisation clarification <br> Size limits more clear <br> Disclaimer that we do not have a Trello board                 |
 | 4.0.28   | 29 September 2025 | sfSampleType fixes                                                                                                                    |
 | 4.0.27   | 25 September 2025 | Fix some issues <br> Sample linking is now permitted with compressed samples                                                          |
 | 4.0.26   | 25 September 2025 | Default modulators are reformatted <br> Reworked sfSampleType <br> A few more clarifications                                          |

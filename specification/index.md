@@ -1,6 +1,6 @@
 # SF-enhanced 4 Specification
 
-## Version 4.0.28
+## Version 4.0.29
 
 ### Copyright notice
 
@@ -22,6 +22,8 @@ Any excerpts from SFSPEC24.PDF are copyrighted by Creative Technology Ltd, and a
 This specification is subject to change without notice. Please obtain the latest version from the SFe Team GitHub page at [https://github.com/sfe-team-was-taken](https://github.com/SFe-Team-was-taken).
 
 This specification assumes familiarity of the SoundFont 2.04 file format (SFSPEC24.PDF), which can be found at [here](https://raw.githubusercontent.com/davy7125/soundfont-standard-v3/117539e5dc2d35d7a6273ba7bc319e7d1e1c9a67/sfspec24.pdf).
+
+We do NOT have an official Trello board. We have no plans to open a Trello board, because we use GitHub Projects. Any "SFe Trello boards" are unofficial!
 
 ---
 
