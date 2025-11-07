@@ -1,23 +1,23 @@
-# Section 5: SFe file format structure
+# Section 5: SFE file format structure
 
 ## 5.1 File format extensions
 
-The file format extension to use for SFe files is generally `.sf4`:
+The file format extension to use for SFE files is generally `.sf4`:
 
-- `.sf2` is avoided because SFe files are *not* SoundFonts, but simply banks that use formatting that is very similar to legacy SF2.04.
-- `.sf3` is avoided because some Werner SF3 bank players may not support SFe features.
+- `.sf2` is avoided because SFE files are *not* SoundFonts, but simply banks that use formatting that is very similar to legacy SF2.04.
+- `.sf3` is avoided because some Werner SF3 bank players may not support SFE features.
 
 Despite `.sf4` also being used by cognitone-formatted banks, these banks never existed due to a [fatal bug](https://github.com/cognitone/sf2convert/issues/1) in cognitone's sf2convert program.
 
-The presence of a legacy SF file extension such as `.sf2` or `.sf3` does not necessarily denote a legacy SF bank! SFe-compatible programs are expected to parse the `ifil` value and `ISFe-list` sub-chunk to properly load the bank, regardless of the extension.
+The presence of a legacy SF file extension such as `.sf2` or `.sf3` does not necessarily denote a legacy SF bank! SFE-compatible programs are expected to parse the `ifil` value and `ISFe-list` sub-chunk to properly load the bank, regardless of the extension.
 
-The file type should be referred to as `SFe bank` and should *not* be referred to as `SoundFont` or anything containing `SoundFont`. `SFSPEC24.PDF` states that files with additional chunks don't conform to the legacy SF2.04 standard.
+The file type should be referred to as `SFE bank` and should *not* be referred to as `SoundFont` or anything containing `SoundFont`. `SFSPEC24.PDF` states that files with additional chunks don't conform to the legacy SF2.04 standard.
 
-SFe currently does not use a MIME type.
+SFE currently does not use a MIME type.
 
 ## 5.2 General RIFF-type format structures (since 4.0.17)
 
-RIFF-type formats are the file format used in legacy SF2.04, Werner SF3 and SFe standards. There are a few different RIFF-type format structures:
+RIFF-type formats are the file format used in legacy SF2.04, Werner SF3 and SFE standards. There are a few different RIFF-type format structures:
 
 - RIFF is the basic version with 32-bit chunk headers, and is used in legacy SF2.04 and Werner SF3.
 - RIFS is a simple extension to RIFF to allow 64-bit chunk headers, and is simpler than RIFF64. It has these changes from RIFF:
@@ -35,11 +35,11 @@ Chunks are defined using this structure:
 
 Chunks can be further divided into "sub-chunks."
 
-Orders of chunks in all SFe banks are strictly defined, as in legacy SF2.04, and should be kept to, except for TSC mode.
+Orders of chunks in all SFE banks are strictly defined, as in legacy SF2.04, and should be kept to, except for TSC mode.
 
 ## 5.3 Chunk header types
 
-In SFe, there are different chunk header types that are used in the format. These correspond to different RIFF-type formats. Currently, there are two defined chunk header types:
+In SFE, there are different chunk header types that are used in the format. These correspond to different RIFF-type formats. Currently, there are two defined chunk header types:
 
 - 32-bit static
     - This is the same as legacy SF
@@ -48,9 +48,9 @@ In SFe, there are different chunk header types that are used in the format. Thes
 - 64-bit static (since 4.0.17)
     - This corresponds to RIFS.
     - The FourCC used is `RIFS`.
-    - To prevent loading by incompatible players, the `sfbk` fourcc is replaced with `sfen` (**SF-en**hanced)
+    - To prevent loading by incompatible players, the `sfbk` fourcc is replaced with `SFEn` (**SF-en**hanced)
 
-Future versions of SFe may define different chunk header types.
+Future versions of SFE may define different chunk header types.
 
 <img title="Figure 4" src="../figures/figure_4.png" alt="32-bit static versus 64-bit static headers.">
 
@@ -66,14 +66,14 @@ RIFF-type formats have error checking features about:
 
 Using this information, it is possible to check for damage to an SF(e) file.
 
-## 5.5 Structure of the SFe 4 file format
+## 5.5 Structure of the SFE 4 file format
 
-### 5.5.1 SFe 4 file format structure outline
+### 5.5.1 SFE 4 file format structure outline
 
-An SFe 4 file consists of:
+An SFE 4 file consists of:
 
 - `RIFF` chunk (main chunk) - this changes depending on the chunk header type to be used.
-    - `sfbk` ascii string - use `sfen` with 64-bit chunk headers
+    - `sfbk` ascii string - use `SFEn` with 64-bit chunk headers
     - `LIST`
         - `INFO` ascii string
         - Sub-chunks inside `INFO-list` in legacy SF2.04 - `ifil`, `isng`, etc.
@@ -87,27 +87,27 @@ An SFe 4 file consists of:
         - `pdta` ascii string
         - Sub-chunks inside `pdta-list` in legacy SF2.04
 
-Only SFe-specific chunks are listed for brevity. In this section, assume that any non-listed chunk is identical to SF2.04.
+Only SFE-specific chunks are listed for brevity. In this section, assume that any non-listed chunk is identical to SF2.04.
 
-<img title="Figure 5" src="../figures/figure_5.png" alt="Legacy SF2.04 vs SFe 4.0 structures.">
+<img title="Figure 5" src="../figures/figure_5.png" alt="Legacy SF2.04 vs SFE 4.0 structures.">
 
-Figure 5: Legacy SF2.04 vs SFe 4.0 structures.
+Figure 5: Legacy SF2.04 vs SFE 4.0 structures.
 
 ### 5.5.2 ISFe-list information
 
-The `ISFe-list` sub-chunk includes many different sub-chunks to show information about SFe-specific features. Generally, we use the `ISFe-list` sub-chunk to make it clearer that this kind of information is SFe-specific.
+The `ISFe-list` sub-chunk includes many different sub-chunks to show information about SFE-specific features. Generally, we use the `ISFe-list` sub-chunk to make it clearer that this kind of information is SFE-specific.
 
-Due to possible compatibility constraints, the `ISFe-list` sub-chunk is found inside the `INFO-list` sub-chunk, rather than as a fourth RIFF chunk. At least a few legacy sound cards (notably the SB X-Fi) do not error out on the inclusion of a fourth separate chunk. Officially, according to `SFSPEC24.PDF`, additional sub-chunks mean that an SFe file is not conformant to the legacy SF2.04 standard.
+Due to possible compatibility constraints, the `ISFe-list` sub-chunk is found inside the `INFO-list` sub-chunk, rather than as a fourth RIFF chunk. At least a few legacy sound cards (notably the SB X-Fi) do not error out on the inclusion of a fourth separate chunk. Officially, according to `SFSPEC24.PDF`, additional sub-chunks mean that an SFE file is not conformant to the legacy SF2.04 standard.
 
 The `ISFe-list` sub-chunk currently contains these sub-chunks as of version 4.0:
 
 - `SFty` chunk (UTF-8 string)
 - `SFvx` chunk (46 bytes)
-    - `wSFeSpecMajorVersion` (`WORD`)
-    - `wSFeSpecMinorVersion` (`WORD`)
-    - `achSFeSpecType[20]` (`CHAR`)
-    - `wSFeDraftMilestone` (`WORD`)
-    - `achSFeFullVersion[20]` (`CHAR`)
+    - `wSFESpecMajorVersion` (`WORD`)
+    - `wSFESpecMinorVersion` (`WORD`)
+    - `achSFESpecType[20]` (`CHAR`)
+    - `wSFEDraftMilestone` (`WORD`)
+    - `achSFEFullVersion[20]` (`CHAR`)
 - `flag` chunk (multiple of 6 bytes)
     - `byBranch` (`BYTE`)
     - `byLeaf` (`BYTE`)
@@ -138,7 +138,7 @@ If the `ifil` sub-chunk is missing, either:
 
 ### 5.6.2 Versioning rules
 
-In SFe 4.0, new versioning rules are used to replace the old ones.
+In SFE 4.0, new versioning rules are used to replace the old ones.
 
 The value of `wMajor` increases every time a change is made to the format that makes it incompatible with existing players.
 
@@ -155,23 +155,23 @@ The specification type used is found in the `ISFe-list` sub-chunk.
 
 ### 5.6.3 Specification versions to ifil values (since 4.0.8)
 
-| wSFeSpecMajorVersion | wSFeSpecMinorVersion | ifil (wMajor)                               | ifil (wMinor)                             |
+| wSFESpecMajorVersion | wSFESpecMinorVersion | ifil (wMajor)                               | ifil (wMinor)                             |
 |----------------------|----------------------|---------------------------------------------|-------------------------------------------|
 | 4                    | 0                    | 2 or 3 (32-bit header)<br>4 (64-bit header) | 1024 (32-bit header)<br>0 (64-bit header) |
 
 ### 5.6.4 isng sub-chunk
 
-A new default isng sub-chunk value is used in SFe: `SFe 4`.
+A new default isng sub-chunk value is used in SFE: `SFE 4`.
 
-- SFe 4.0 players should recognize this and remove the default velocity related filter used in legacy SF2.04.
-- In the case of a missing isng chunk, files with an ifil sub-chunk with `wMajor` = 2 or 3 and `wMinor` >= `1024`, or `wMajor` >= 4, assume an isng sub-chunk value of `SFe 4`. Don't assume `EMU8000`.
+- SFE 4.0 players should recognize this and remove the default velocity related filter used in legacy SF2.04.
+- In the case of a missing isng chunk, files with an ifil sub-chunk with `wMajor` = 2 or 3 and `wMinor` >= `1024`, or `wMajor` >= 4, assume an isng sub-chunk value of `SFE 4`. Don't assume `EMU8000`.
 
 Additionally, UTF-8 is now used instead of ASCII, and the length limit is removed.
 
 - The `isng` sub-chunk contains a UTF-8 string of any length.
-- Example of value: `SFe 4` (with appropriate zero bytes).
+- Example of value: `SFE 4` (with appropriate zero bytes).
 
-Reject anything not terminated with a zero byte, and assume the value `SFe 4`. Do NOT assume `EMU8000` by default.
+Reject anything not terminated with a zero byte, and assume the value `SFE 4`. Do NOT assume `EMU8000` by default.
 
 ### 5.6.5 List of sound engines
 
@@ -185,12 +185,12 @@ Reject anything not terminated with a zero byte, and assume the value `SFe 4`. D
 | EMU10K2               | `E-mu 10K2`    | 2.01                         | 16 bit        | SB Audigy       |
 | EMU20K1, EMU20K2      | `X-Fi`         | 2.04                         | 24 bit        | SB X-Fi         |
 
-#### SFe
+#### SFE
 
 |                       |                |                 |                                                   |
 |-----------------------|----------------|-----------------|---------------------------------------------------|
-| **Sound engine name** | **isng value** | **SFe version** | **Bit depth**                                     |
-| SFe 4                 | `SFe 4`        | 4.0             | 8 bit, 16 bit, 24 bit, 32 bit, 64 bit (since 4.0.11) |
+| **Sound engine name** | **isng value** | **SFE version** | **Bit depth**                                     |
+| SFE 4                 | `SFE 4`        | 4.0             | 8 bit, 16 bit, 24 bit, 32 bit, 64 bit (since 4.0.11) |
 
 ### 5.6.6 ICRD sub-chunk
 
@@ -222,41 +222,41 @@ Reject anything not terminated with a zero byte. Do NOT reject the file as Struc
 
 Read the legacy SF2.04 specification for info on how to use ROM samples.
 
-The ROM emulator should be implemented in SFe programs.
+The ROM emulator should be implemented in SFE programs.
 
 ### 5.6.9 SFty sub-chunk
 
-The `SFty` sub-chunk is nested inside the `ISFe-list` sub-chunk. It is required and contains a case-sensitive UTF-8 string with even length identifying the type of format used in SFe. Its value is used by SFe-compatible players to assist in loading banks by telling the program what variant of SFe to load a bank as. (since 4.0.13)
+The `SFty` sub-chunk is nested inside the `ISFe-list` sub-chunk. It is required and contains a case-sensitive UTF-8 string with even length identifying the type of format used in SFE. Its value is used by SFE-compatible players to assist in loading banks by telling the program what variant of SFE to load a bank as. (since 4.0.13)
 
 The defined values of the `SFty` chunk are:
 
-- the 14 bytes representing `SFe standard` as 12 UTF-8 characters followed by two zero bytes. (since 4.0.12)
-- the 22 bytes representing `SFe standard with TSC` as 21 UTF-8 characters followed by one zero byte. (since 4.0.12)
+- the 14 bytes representing `SFE standard` as 12 UTF-8 characters followed by two zero bytes. (since 4.0.12)
+- the 22 bytes representing `SFE standard with TSC` as 21 UTF-8 characters followed by one zero byte. (since 4.0.12)
 
-The field should not be longer than 22 bytes in SFe 4.0. (since 4.0.12)
+The field should not be longer than 22 bytes in SFE 4.0. (since 4.0.12)
 
-If the `SFty` sub-chunk is missing or its contents are an undefined value or in an invalid format, other properties of the structure should be used to determine the variant of SFe that is in use. Do not assume `SFe standard`; only use such a value when it is evident beyond a reasonable doubt that the file used is in the `SFe standard` format. (since 4.0.12)
+If the `SFty` sub-chunk is missing or its contents are an undefined value or in an invalid format, other properties of the structure should be used to determine the variant of SFE that is in use. Do not assume `SFE standard`; only use such a value when it is evident beyond a reasonable doubt that the file used is in the `SFE standard` format. (since 4.0.12)
 
 ### 5.6.10 SFvx sub-chunk
 
-The `SFvx` sub-chunk is nested inside the `ISFe-list` sub-chunk. It is required and contains extended SFe version attributes. (since 4.0.13)
+The `SFvx` sub-chunk is nested inside the `ISFe-list` sub-chunk. It is required and contains extended SFE version attributes. (since 4.0.13)
 
 It is always 46 bytes in length, containing data in the structure below:
 
 ```c
-struct SFeExtendedVersion
+struct SFEExtendedVersion
 {
-    WORD wSFeSpecMajorVersion;
-    WORD wSFeSpecMinorVersion;
-    CHAR achSFeSpecType[20];
-    WORD wSFeDraftMilestone;
-    CHAR achSFeFullVersion[20];
+    WORD wSFESpecMajorVersion;
+    WORD wSFESpecMinorVersion;
+    CHAR achSFESpecType[20];
+    WORD wSFEDraftMilestone;
+    CHAR achSFEFullVersion[20];
 };
 ```
 
-The `WORD` values `wSFeSpecMajorVersion` and `wSFeSpecMinorVersion` contain the SFe specification version, and are used to differentiate between different SFe versions as the value of `ifil` only changes when the format of the `SFvx` sub-chunk does so.
+The `WORD` values `wSFESpecMajorVersion` and `wSFESpecMinorVersion` contain the SFE specification version, and are used to differentiate between different SFE versions as the value of `ifil` only changes when the format of the `SFvx` sub-chunk does so.
 
-The case-sensitive UTF-8 character field `achSFeSpecType` contains a specification type in UTF-8. For the purposes of this specification, the defined values are:
+The case-sensitive UTF-8 character field `achSFESpecType` contains a specification type in UTF-8. For the purposes of this specification, the defined values are:
 
 - `Final` for final specifications.
 - `Release Candidate` for release candidate specifications.
@@ -265,17 +265,17 @@ The case-sensitive UTF-8 character field `achSFeSpecType` contains a specificati
 
 Assume `Final` if contents are unknown.
 
-The `WORD` value `wSFeDraftMilestone` contains the draft specification milestone or release candidate number that a bank was created to. This varies depending on the value of `achSFeSpecType`.
+The `WORD` value `wSFEDraftMilestone` contains the draft specification milestone or release candidate number that a bank was created to. This varies depending on the value of `achSFESpecType`.
 
-The case-sensitive UTF-8 character field `achSFeFullVersion` contains the full version string of the specification used, for example `4.0.22`.
+The case-sensitive UTF-8 character field `achSFEFullVersion` contains the full version string of the specification used, for example `4.0.22`.
 
 If the `SFvx` sub-chunk is missing or of an incorrect size, assume these values:
 
-- `wSFeSpecMajorVersion` and `wSFeSpecMinorVersion` correspond to the highest version declared in the `flag` sub-chunk
-    - If there is no valid `flag` sub-chunk, then assume the highest SFe version supported by the program.
-- `achSFeSpecType=Final`
-- `wSFeDraftMilestone=0`
-- `achSFeFullVersion` corresponds to the other assumed values
+- `wSFESpecMajorVersion` and `wSFESpecMinorVersion` correspond to the highest version declared in the `flag` sub-chunk
+    - If there is no valid `flag` sub-chunk, then assume the highest SFE version supported by the program.
+- `achSFESpecType=Final`
+- `wSFEDraftMilestone=0`
+- `achSFEFullVersion` corresponds to the other assumed values
 
 The file may optionally be rejected as Structurally Unsound.
 
@@ -286,7 +286,7 @@ The `flag` sub-chunk is nested inside the `ISFe-list` sub-chunk. It is required 
 It is always a multiple of 6 bytes in length, and contains at least 2 records (1 feature flag and a record at the end) according to the structure:
 
 ```c
-struct SFeFeatureFlag
+struct SFEFeatureFlag
 {
     BYTE byBranch;
     BYTE byLeaf;
@@ -300,9 +300,9 @@ The `BYTE` value `byLeaf` represents the leaf of the feature. Leaves correspond 
 
 The `DWORD` value `dwFlags` represents the feature flags themselves, which represent different parts of the feature. Depending on the `byLeaf` value, it can be a number, a series of bytes, etc.
 
-A tree value is a combination of a branch value and a leaf value, and is conventionally written in the format `[branch]:[leaf]` with hexadecimal values, for example "feature flag `03:01`" refers to the feature flag with branch number `3` and leaf number `1` (SFe Compression sample compression formats). While the `flag` sub-chunk uses a tree structure, it should be noted that no branch includes sub-branches; the branches only include leaves.
+A tree value is a combination of a branch value and a leaf value, and is conventionally written in the format `[branch]:[leaf]` with hexadecimal values, for example "feature flag `03:01`" refers to the feature flag with branch number `3` and leaf number `1` (SFE Compression sample compression formats). While the `flag` sub-chunk uses a tree structure, it should be noted that no branch includes sub-branches; the branches only include leaves.
 
-Branch numbers between 240 (`F0`) and 255 (`FF`) are private-use branches that will not be defined in the SFe specification itself, and are free to be used by programs.
+Branch numbers between 240 (`F0`) and 255 (`FF`) are private-use branches that will not be defined in the SFE specification itself, and are free to be used by programs.
 
 An exhaustive list of feature flags and their corresponding tree values can be found in section 6.2.
 
@@ -312,7 +312,7 @@ If the `flag` sub-chunk is missing or an incorrect size, then an effort should 
 
 ### 5.6.12 DMOD sub-chunk (since 4.0.15)
 
-The `DMOD` sub-chunk is nested inside the `INFO-list` sub-chunk. It is optional and contains the redefined default modulators of an SFe bank.
+The `DMOD` sub-chunk is nested inside the `INFO-list` sub-chunk. It is optional and contains the redefined default modulators of an SFE bank.
 
 It is always a multiple of 10 bytes in length, and contains at least 2 records (1 feature flag and a record at the end) according to a structure identical to that of a `PMOD` or `IMOD` modulator list:
 
@@ -333,7 +333,7 @@ If the `DMOD` sub-chunk is present but without any modulators, then there are no
 
 #### Default modulator changes
 
-The default modulators list used by SFe 4.0 is similar to that of legacy SF2.04, with these changes:
+The default modulators list used by SFE 4.0 is similar to that of legacy SF2.04, with these changes:
 
 - Default modulator 2 (MIDI note-on velocity to filter cutoff) is optional.
     - The use of the SF2.04 version of default modulator 2 is required.
@@ -442,7 +442,7 @@ The `xdta-list` sub-chunk is nested inside the `INFO-list` sub-chunk. It is opti
 
 Information about `pdta-list` sub-chunk behaviour in `xdta-list` is described in the corresponding sections.
 
-SFe programs should only write an `xdta-list` sub-chunk if standard `pdta-list` limits are exceeded, but if it is unclear whether this is the case, this sub-chunk should be written anyway.
+SFE programs should only write an `xdta-list` sub-chunk if standard `pdta-list` limits are exceeded, but if it is unclear whether this is the case, this sub-chunk should be written anyway.
 
 If the `xdta-list` sub-chunk is present but doesn't match the `pdta-list` chunk, then the `pdta-list` chunk takes precedence and the `xdta-list` sub-chunk is ignored.
 
@@ -452,27 +452,27 @@ If the `xdta-list` sub-chunk is missing, then the `pdta-list` chunk should be lo
 
 ### 5.7.1 smpl sub-chunk
 
-This sub-chunk will now be present in most SFe files, as there is likely to be no ROM where samples can be read from. This does not include AWE ROM emulation. It works in an almost identical manner to legacy SF2.04, with these important differences:
+This sub-chunk will now be present in most SFE files, as there is likely to be no ROM where samples can be read from. This does not include AWE ROM emulation. It works in an almost identical manner to legacy SF2.04, with these important differences:
 
 - This contains one or more samples of audio in linearly coded 16-bit, signed words. These words are little-endian. (since 4.0.5)
 - No more leeway of 46 zero-valued samples is required after each sample.
-- Before saving, SFe editors should insert this leeway. Otherwise, they might give a warning telling the user that loop and interpolation quality may be affected.
-- If ROM samples are detected in SFe files, attempt to load them, even if this sub-chunk is missing.
+- Before saving, SFE editors should insert this leeway. Otherwise, they might give a warning telling the user that loop and interpolation quality may be affected.
+- If ROM samples are detected in SFE files, attempt to load them, even if this sub-chunk is missing.
 - If this sub-chunk is missing, and no ROM samples are found, show a suitable error message.
-- All new SFe sample format features require containerisation, which works in the same way as WernerSF3. (since 4.0.22)
+- All new SFE sample format features require containerisation, which works in the same way as WernerSF3. (since 4.0.22)
 
 ### 5.7.2 About sdta structure modes (since 4.0.19)
 
 In this specification, four different types of sample data structures are described:
 
-- SFe Compression (SFeC) mode (containerised)
+- SFE Compression (SFEC) mode (containerised)
 - Uncompressed containerised (UCC) mode (containerised)
 - Legacy 24-bit (sm24) mode (non-containerised)
 - Legacy 16-bit mode (non-containerised)
 
-To access the advanced SFe sample format modes, containerised samples are required. 
+To access the advanced SFE sample format modes, containerised samples are required. 
 
-Non-containerised modes are described here for legacy SF2.0x compatibility and to allow the use of SFe instrument and preset features while preserving legacy player support. (since 4.0.22)
+Non-containerised modes are described here for legacy SF2.0x compatibility and to allow the use of SFE instrument and preset features while preserving legacy player support. (since 4.0.22)
 
 ### 5.7.3 Containerised modes (since 4.0.9)
 
@@ -488,17 +488,17 @@ Please note that the sm24 sub-chunk is not used in containerised samples. (since
 
 Todo: Create diagram
 
-#### What are SFe Compression and uncompressed containerised modes? (since 4.0.9)
+#### What are SFE Compression and uncompressed containerised modes? (since 4.0.9)
 
-SFe Compression is the encoding system for compressed samples used by SFe, based on Werner SF3.
+SFE Compression is the encoding system for compressed samples used by SFE, based on Werner SF3.
 
-By standardising on Werner SF3 in the form of SFe Compression, we will hopefully ensure that everyone uses the same compression formats. Due to this, we will mostly make small changes to SFe Compression which correspond to updates to the Werner SF3 specification by other SF player programs. We may also make other standardisation changes to streamline the format. To achieve this, all SFe players should implement SFe Compression.
+By standardising on Werner SF3 in the form of SFE Compression, we will hopefully ensure that everyone uses the same compression formats. Due to this, we will mostly make small changes to SFE Compression which correspond to updates to the Werner SF3 specification by other SF player programs. We may also make other standardisation changes to streamline the format. To achieve this, all SFE players should implement SFE Compression.
 
-Uncompressed containerised mode provides the containerisation of SFe Compression without actually compressing the samples.
+Uncompressed containerised mode provides the containerisation of SFE Compression without actually compressing the samples.
 
 #### File identification
 
-The `wMajor` value in the `ifil` sub-chunk is set to 3 instead of 2. The value of the `SFvx` sub-chunk remains unchanged. Therefore, SFe players should not use the `ifil` value to determine the SFe version, but rather the `SFvx` sub-chunk.
+The `wMajor` value in the `ifil` sub-chunk is set to 3 instead of 2. The value of the `SFvx` sub-chunk remains unchanged. Therefore, SFE players should not use the `ifil` value to determine the SFE version, but rather the `SFvx` sub-chunk.
 
 If non-containerised samples are used, then `wMajor` remains 2. (since 4.0.27)
 
@@ -510,7 +510,7 @@ In addition, the "left," "right" and "linked" flags can now be combined with the
 
 #### Supported containerisation formats for samples (since 4.0.22)
 
-Currently, SFe Compression requires any containerised samples to be in these formats:
+Currently, SFE Compression requires any containerised samples to be in these formats:
 
 - wav
 - ogg
@@ -574,28 +574,28 @@ If bit 4 of the `sfSampleType` field is clear, then the sample data index fields
 
 #### Using both compressed and uncompressed samples in the same file
 
-You can use both compressed and uncompressed samples with SFe Compression. The preferred method of doing this is to use wav containers for uncompressed samples.
+You can use both compressed and uncompressed samples with SFE Compression. The preferred method of doing this is to use wav containers for uncompressed samples.
 
-The legacy Werner SF3 practice of placing uncompressed PCM samples at the beginning of the `smpl` sub-chunk before the compressed sample byte stream is still supported, but deprecated. Because each sample is compressed individually, the resulting byte streams of all encoded samples are written to the `smpl` sub-chunk. The `smpl` sub-chunk may also contain uncontainerised and uncompressed little-endian PCM samples. Not supporting legacy mixed containerisation does not affect SFe compatibility. (since 4.0.27)
+The legacy Werner SF3 practice of placing uncompressed PCM samples at the beginning of the `smpl` sub-chunk before the compressed sample byte stream is still supported, but deprecated. Because each sample is compressed individually, the resulting byte streams of all encoded samples are written to the `smpl` sub-chunk. The `smpl` sub-chunk may also contain uncontainerised and uncompressed little-endian PCM samples. Not supporting legacy mixed containerisation does not affect SFE compatibility. (since 4.0.27)
 
 For compressed byte streams, it is not necessary to add forty-six zero-valued sample data points after each sample. The length of the `smpl` sub-chunk is not required to be a multiple of two for compressed banks, and its surrounding `LIST` chunk is also not padded to a multiple of two as a consequence.
 
 #### Incompatible compression formats
 
-The only supported compression system for SFe is the Werner SF3-compatible SFe Compression. Proprietary SF compression formats (`.sfark`, `.sfpack`, `.sf2pack`, `.sfogg`, `.sfq`, `.sf4`) must not be used, but programs can remain compatible with existing legacy SF2.0x banks compressed in such formats. Because Cognitone SF4-formatted banks are not valid Werner SF3 banks, they are also incompatible with SFe Compression. (since 4.0.14)
+The only supported compression system for SFE is the Werner SF3-compatible SFE Compression. Proprietary SF compression formats (`.sfark`, `.sfpack`, `.sf2pack`, `.sfogg`, `.sfq`, `.sf4`) must not be used, but programs can remain compatible with existing legacy SF2.0x banks compressed in such formats. Because Cognitone SF4-formatted banks are not valid Werner SF3 banks, they are also incompatible with SFE Compression. (since 4.0.14)
 
 ### 5.7.4 Non-containerised modes (since 4.0.9)
 
-The legacy non-containerised 16-bit and 24-bit modes were used in the legacy SoundFont format. You can still create SFe banks using these formats, but new sample format features are not usable. (since 4.0.22)
+The legacy non-containerised 16-bit and 24-bit modes were used in the legacy SoundFont format. You can still create SFE banks using these formats, but new sample format features are not usable. (since 4.0.22)
 
-If the `ifil` version is `2.04` or greater, and there an `sm24` sub-chunk is present, then the `sdta` structure mode is legacy 24-bit (`sm24`) mode. Legacy 24-bit mode can only function with uncompressed samples due to the segmented structure of samples stored in this way, and we strongly recommend against using legacy 24-bit mode, because containerisation support is a requirement for SFe level 1 and is easier to work with. (since 4.0.9)
+If the `ifil` version is `2.04` or greater, and there an `sm24` sub-chunk is present, then the `sdta` structure mode is legacy 24-bit (`sm24`) mode. Legacy 24-bit mode can only function with uncompressed samples due to the segmented structure of samples stored in this way, and we strongly recommend against using legacy 24-bit mode, because containerisation support is a requirement for SFE level 1 and is easier to work with. (since 4.0.9)
 
 Note that if the `ifil` version is below `2.04` (signifying legacy SF2.01 or earlier), then the `sdta` structure mode is legacy 16-bit mode, and `sm24` is ignored.
 
 ### 5.7.5 Looping rules
 
 - No more leeway of eight samples is required.
-- Before saving, SFe editors might give a warning about this leeway telling the user that loop and interpolation quality may be affected.
+- Before saving, SFE editors might give a warning about this leeway telling the user that loop and interpolation quality may be affected.
 
 ### 5.7.6 Implementation of stereo samples
 
@@ -624,17 +624,17 @@ The values in `phdr` are parsed slightly differently in `xdta-list`:
 - `achPresetName[20]` in `xdta-list` represents the *second half* of the preset name.
     - This is combined with the `achPresetName` in `pdta-list` for a total of 40 characters.
 - `wPreset` is unused.
-    - SFe editors must write a value of zero for `wPreset` in `xdta-list`.
+    - SFE editors must write a value of zero for `wPreset` in `xdta-list`.
 - `wBank` is unused.
-    - SFe editors must write a value of zero for `wBank` in `xdta-list`
-    - However, SFe players may use `wBank` in `xdta-list` for internal uses.
+    - SFE editors must write a value of zero for `wBank` in `xdta-list`
+    - However, SFE players may use `wBank` in `xdta-list` for internal uses.
 - `wPresetBagNdx` represents the upper 16 bits of the preset bag index.
     - `fullIndex = (xdtaWord << 16) | pdtaWord`
 - `dwLibrary`, `dwGenre` and `dwMorphology` remain unused.
 
 ### 5.8.2 New Bank System
 
-In SFe 4.0, the bank system has been completely overhauled. Please read this section carefully to ensure that you correctly implement bank selects in your program.
+In SFE 4.0, the bank system has been completely overhauled. Please read this section carefully to ensure that you correctly implement bank selects in your program.
 
 #### Using MIDI Control Change #32 (Bank Select LSB)
 
@@ -656,7 +656,7 @@ This splits the one `WORD` in legacy SF2.04 into two `BYTE` values, one for each
 
 Legacy SF2.04 allows bank developers to define one bank of percussion kits for use in channel 10 that can be switched between using MIDI Program Change instructions by using the `wBank` number `128`.  In other words, if bit 7 is set, bits 0-6 must be clear - you cannot use bank select instructions with channel 10.
 
-SFe 4.0 now allows users to set bit 7 with any value for bits 0-6. The result is that there are 128 percussion banks available when using `byBankMSB`, as shown by the figure below.
+SFE 4.0 now allows users to set bit 7 with any value for bits 0-6. The result is that there are 128 percussion banks available when using `byBankMSB`, as shown by the figure below.
 
 <img title="Figure 9" src="../figures/figure_9.png" alt="How the percussion bank listing differs from legacy SF2.04.">
 
@@ -668,9 +668,9 @@ Figure 9: How the percussion bank listing differs from legacy SF2.04. When byte 
 
 Figure 10: The flowchart for bank select instructions in legacy SF2.04.
 
-<img title="Figure 11" src="../figures/figure_11.png" alt="The flowchart for bank select instructions in SFe 4.0.">
+<img title="Figure 11" src="../figures/figure_11.png" alt="The flowchart for bank select instructions in SFE 4.0.">
 
-Figure 11: The flowchart for bank select instructions in SFe 4.0.
+Figure 11: The flowchart for bank select instructions in SFE 4.0.
 
 Notice that not only are extra steps added for bank select LSB and percussion bank select handling, but extra configuration information used by the player is added to determine the correct preset to use.
 
@@ -771,7 +771,7 @@ The `shdr` sub-chunk is required; files without a `shdr` sub-chunk are Structura
 
 #### Sample Rate Limit Changes
 
-- In SFe, sample rates (`dwSampleRate`) are stored as a 32-bit integer. This is the same behavior as seen in the legacy SF2.04 format. This results in a theoretical maximum sample rate of 4,294,967,295 Hz.
+- In SFE, sample rates (`dwSampleRate`) are stored as a 32-bit integer. This is the same behavior as seen in the legacy SF2.04 format. This results in a theoretical maximum sample rate of 4,294,967,295 Hz.
 - In the legacy SF2.04 specification, E-mu suggested that sample rates of below 400 Hz or above 50,000 Hz should be avoided as some legacy hardware platforms may not be able to reproduce these sounds. This is not a limitation of the specification, but rather a limitation of legacy sound cards.
 - Despite this, Creative did not use 16-bit integers for sample rate in legacy SF2.04. It is thus safe to use sample rates in excess of 50,000 Hz. If a sample rate of below 400 Hz or above 50,000 Hz is encountered, no attempt should be made to change the sample rate.
 - A zero sample rate should be reset.
@@ -790,12 +790,12 @@ Therefore, the specification for `sfSampleType` discourages the use of fixed enu
 - If bit 2 is set, a sample is the right part of a stereo sample.
 - If bit 3 is set, a sample is the left part of a stereo sample.
 - If bit 4 is set, a sample is a linked sample.
-- If bit 5 is set, a sample is compressed using SFe Compression.
-    - Read section 6.2 for more information on SFe Compression.
+- If bit 5 is set, a sample is compressed using SFE Compression.
+    - Read section 6.2 for more information on SFE Compression.
 - If bit 16 is set, a sample is stored in ROM.
     - Read section 9 for more information on ROM samples.
 
-Note that all unused bits are reserved and should not be used by SFe implementations.
+Note that all unused bits are reserved and should not be used by SFE implementations.
 
 ### List of valid sfSampleType values (since 4.0.28)
 
@@ -831,10 +831,10 @@ The values in `shdr` are parsed slightly differently in `xdta-list`:
     - With 64-bit chunk headers, these values represent the upper 32 bits of the sample data field index.
         - `fullIndex = (xdtaDword << 32) | pdtaDword`
 - `dwSampleRate` in `xdta-list` is unused, because it is already a 32-bit integer.
-    - SFe software should write a value of zero.
+    - SFE software should write a value of zero.
 - `byOriginalPitch` and `chPitchCorrection` are unused.
-    - SFe software should write a value of zero.
+    - SFE software should write a value of zero.
 - `wSampleLink` in `xdta-list` represents the upper 16 bits of the sample link index.
     - `fullIndex = (xdtaWord << 16) | pdtaWord`
 - `sfSampleType` in `xdta-list` is unused.
-    - SFe software should write a value of zero.
+    - SFE software should write a value of zero.

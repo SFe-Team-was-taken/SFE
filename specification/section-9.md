@@ -1,16 +1,16 @@
-# Section 9: SiliconSFe and the AWE ROM emulator
+# Section 9: SiliconSFE and the AWE ROM emulator
 
-## 9.1 SiliconSFe overview
+## 9.1 SiliconSFE overview
 
-While we are unaware of any shipping products using the SiliconSF system found in `SFSPEC24.PDF` (the AWE cards used an early predecessor of SiliconSF), you can use ROM samples formatted in the SiliconSF format with SFe. However, SiliconSFe support is explicitly optional. (since 4.0.5)
+While we are unaware of any shipping products using the SiliconSF system found in `SFSPEC24.PDF` (the AWE cards used an early predecessor of SiliconSF), you can use ROM samples formatted in the SiliconSF format with SFE. However, SiliconSFE support is explicitly optional. (since 4.0.5)
 
 ## 9.2 Header format
 
 ### 9.2.1 About the header format
 
-The SiliconSFe header format is almost identical to legacy SF2.04, however an explanation is provided here due to poor documentation of SiliconSF.
+The SiliconSFE header format is almost identical to legacy SF2.04, however an explanation is provided here due to poor documentation of SiliconSF.
 
-Here is the SiliconSFe header format:
+Here is the SiliconSFE header format:
 
 ```c
 typedef struct romHdrType{
@@ -21,13 +21,13 @@ typedef struct romHdrType{
     CHAR romVer[4];
     SHORT bankChecksum;
     SHORT bankChecksum2sComplement;
-    CHAR bankSFeVersion;
+    CHAR bankSFEVersion;
     CHAR bankProduct[16];
     BYTE bankSampleCompType;
     CHAR filler1[2];
     CHAR bankStyle[16];
     CHAR bankCopyright[80];
-    DWORD romSFeBankStart;
+    DWORD romSFEBankStart;
     DWORD romSineWaveStart;
     DWORD filler2[124];
     SHORT sampleSineWave[SINEWAVESIZE];
@@ -36,17 +36,17 @@ typedef struct romHdrType{
 
 ### 9.2.2 romRiffHeader
 
-In SiliconSFe, it is defined as the FourCC used by the chunk header type used by the integrated SF bank, for example `RIFF`, `RIFS`, `RIFD`, etc. (since 4.0.17)
+In SiliconSFE, it is defined as the FourCC used by the chunk header type used by the integrated SF bank, for example `RIFF`, `RIFS`, `RIFD`, etc. (since 4.0.17)
 
-In the legacy SF2.04 specification, this is named `romRsrc` and was declared by Creative as "unused". The name in SiliconSFe more accurately describes its usage.
+In the legacy SF2.04 specification, this is named `romRsrc` and was declared by Creative as "unused". The name in SiliconSFE more accurately describes its usage.
 
 ### 9.2.3 romByteSize
 
-This is an UNSIGNED `DWORD` value with the size of the SiliconSFe ROM blob in bytes. It is limited to 4 GiB in SiliconSFe 1.0. Signed integers are prohibited.
+This is an UNSIGNED `DWORD` value with the size of the SiliconSFE ROM blob in bytes. It is limited to 4 GiB in SiliconSFE 1.0. Signed integers are prohibited.
 
 ### 9.2.4 romInterleaveIndex
 
-This is used for interleaved ROMs. You can interleave up to 256 ROMs with one SiliconSFe blob.
+This is used for interleaved ROMs. You can interleave up to 256 ROMs with one SiliconSFE blob.
 
 In the legacy SF2.04 specification, this is named `interleaveIndex`.
 
@@ -60,7 +60,7 @@ In the legacy SF2.04 specification, this is named `revision`.
 
 This corresponds to the `iver` value in the integrated SF bank.
 
-In the legacy SF2.04 specification, this is named `id` and is erroneously listed as corresponding to the `irom` value. The name in SiliconSFe more accurately describes its usage.
+In the legacy SF2.04 specification, this is named `id` and is erroneously listed as corresponding to the `irom` value. The name in SiliconSFE more accurately describes its usage.
 
 ### 9.2.7 bankChecksum
 
@@ -74,21 +74,21 @@ This stores the twos-complement of the value found in `bankChecksum`.
 
 In the legacy SF2.04 specification, this is named `checksum2sComplement`.
 
-### 9.2.9 bankSFeVersion
+### 9.2.9 bankSFEVersion
 
-This value should be the same as the `wSFeSpecMajorVersion` value in the `SFvx` sub-chunk in SFe, and the same as the `wMajor` value in the `ifil` sub-chunk in non-SFe. For an unknown or other format, this value is `0`.
+This value should be the same as the `wSFESpecMajorVersion` value in the `SFvx` sub-chunk in SFE, and the same as the `wMajor` value in the `ifil` sub-chunk in non-SFE. For an unknown or other format, this value is `0`.
 
 In the legacy SF2.04 specification, this is named `bankFormat` and was declared by Creative as "unused".
 
 ### 9.2.10 bankProduct
 
-This is a UTF-8 string that stores the product name (conventionally `SiliconSFe`).
+This is a UTF-8 string that stores the product name (conventionally `SiliconSFE`).
 
 In the legacy SF2.04 specification, this is named `product`.
 
 ### 9.2.11 sampleCompType
 
-For the purpose of SiliconSFe, this value is `1` if any kind of sample precompensation is used, and `0` otherwise.
+For the purpose of SiliconSFE, this value is `1` if any kind of sample precompensation is used, and `0` otherwise.
 
 In the legacy SF2.04 specification, Creative said that it indicates the type of sample precompensation that is used in the SiliconSF blob.
 
@@ -100,19 +100,19 @@ In the legacy SF2.04 specification, this is named `style`.
 
 ### 9.2.13 bankCopyright
 
-This is a UTF-8 string that stores copyright information about the SiliconSFe blob.
+This is a UTF-8 string that stores copyright information about the SiliconSFE blob.
 
 In the legacy SF2.04 specification, this is named `copyright`.
 
-### 9.2.14 romSFeBankStart
+### 9.2.14 romSFEBankStart
 
-This stores the location in the SiliconSFe blob where the integrated SF bank starts.
+This stores the location in the SiliconSFE blob where the integrated SF bank starts.
 
-In the legacy SF2.04 specification, this is named `sampleStart`. The name in SiliconSFe more accurately describes its usage.
+In the legacy SF2.04 specification, this is named `sampleStart`. The name in SiliconSFE more accurately describes its usage.
 
 ### 9.2.15 romSineWaveStart
 
-This stores the location in the SiliconSFe blob where the test sine wave sample starts.
+This stores the location in the SiliconSFE blob where the test sine wave sample starts.
 
 In the legacy SF2.04 specification, this is named `sineWaveStart`.
 
@@ -126,14 +126,14 @@ In the legacy SF2.04 specification, this is named `sineWave`.
 
 ### 9.3.1 Introducing the AWE ROM emulator
 
-Except for when size concerns prohibit its inclusion, SFe players should include an AWE ROM emulator.
+Except for when size concerns prohibit its inclusion, SFE players should include an AWE ROM emulator.
 
 - The AWE ROM emulator includes 152 samples.
 - The file size should be 1MB, as all samples should be to the same standard as the original.
 - Samples which the program developer has the right to use can be used as a replacement for the original ROM samples.
 - Freely-usable reference implementation samples are available, but are not intended for production use.
 - Sample names will remain the same, but there will be acceptable alias names.
-- Emulators should also be able to open up SF files (either legacy SF or SFe) containing samples and metadata.
+- Emulators should also be able to open up SF files (either legacy SF or SFE) containing samples and metadata.
 - There may or may not be instruments or presets.
 
 ### 9.3.2 ROM emulator sample specification
@@ -293,4 +293,4 @@ Except for when size concerns prohibit its inclusion, SFe players should include
 | 151    | xyloe4looped         | Xylophone E4        <br> Xylophone           <br> Xylo Unlooped E4    <br> Xylo Unlooped       <br> XylophoneUnlooped E4<br> Xylophone Unlooped | 980           | 7-976       | Only sample of that instrument                                                           |
 | 152    | xyloe4unlooped       | Xylo Looped E4      <br> Xylo Looped         <br> Xylophone Looped E4 <br> Xylophone Looped                                                     | 980           | 7-976       | Only sample of that instrument                                                           |
 
-Sample specification is fixed at 44.1khz Mono with no links and tuning at 60 with no fine-tuning. You can either use discrete samples, or create your own SiliconSFe ROM containing the emulator samples.
+Sample specification is fixed at 44.1khz Mono with no links and tuning at 60 with no fine-tuning. You can either use discrete samples, or create your own SiliconSFE ROM containing the emulator samples.

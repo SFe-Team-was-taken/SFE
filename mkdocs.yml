@@ -1,11 +1,11 @@
-site_name: SFe - Bringing music to new heights
+site_name: SFE - Bringing music to new heights
 site_description: Official specification for the SF-enhanced format.
-site_author: SFe Team
-site_url: https://sfe-team-was-taken.github.io/SFe/
-copyright: Copyright © 2025 SFe Team and contributors.
-  The SFe Team is in no way sponsored by or otherwise affiliated with Creative Technology Ltd. or E-mu Systems, Inc. SoundFont® is a registered trademark of Creative Technology Ltd.
-repo_url: https://github.com/SFe-Team-was-taken/SFe
-repo_name: SFe-Team-was-taken/SFe
+site_author: SFE Team
+site_url: https://sfe-team-was-taken.github.io/SFE/
+copyright: Copyright © 2025 SFE Team and contributors.
+  The SFE Team is in no way sponsored by or otherwise affiliated with Creative Technology Ltd. or E-mu Systems, Inc. SoundFont® is a registered trademark of Creative Technology Ltd.
+repo_url: https://github.com/SFe-Team-was-taken/SFE
+repo_name: SFE-Team-was-taken/SFE
 
 docs_dir: ./
 site_dir: ./gh-pages
@@ -82,7 +82,7 @@ extra_css:
 
 nav:
   - index.md
-  - Issue Tracker: 'https://github.com/SFe-Team-was-taken/SFe/issues'
+  - Issue Tracker: 'https://github.com/SFe-Team-was-taken/SFE/issues'
   - Specification:
       - specification/index.md
       - specification/section-1.md
@@ -108,4 +108,4 @@ extra:
   social:
     - icon: fontawesome/brands/github
       link: https://github.com/SFe-Team-was-taken
-      name: SFe Team on GitHub
+      name: SFE Team on GitHub

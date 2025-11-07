@@ -36,7 +36,7 @@ Our code of conduct is very simple, but please read it before contributing.
 
 ### No unsolicited sample requests
 
-**Don't make unsolicited requests for audio samples.** SFe for the most part does not manage audio samples, and if you can't find samples that meet your requirements, we probably can't either.
+**Don't make unsolicited requests for audio samples.** SFE for the most part does not manage audio samples, and if you can't find samples that meet your requirements, we probably can't either.
 
 ## Failure to follow these rules
 

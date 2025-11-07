@@ -4,7 +4,7 @@ hide:
   - toc
 ---
 
-# Contributing to SFe
+# Contributing to SFE
 
 If you have a proposal for how we could implement a new feature, then you can fork this repository and then create a pull request. Please fork from the "version/dev" branch, and send pull requests to the "version/dev" branch.
 

@@ -4,17 +4,17 @@
 
 ### 10.1.1 Legacy SF2.04 specification compatibility
 
-SFe banks are not SoundFonts, and will not play properly on a legacy SF player! However, SFe banks are very similar to SoundFonts in terms of file structure, and should thus ideally be able to at least load on legacy SF players.
+SFE banks are not SoundFonts, and will not play properly on a legacy SF player! However, SFE banks are very similar to SoundFonts in terms of file structure, and should thus ideally be able to at least load on legacy SF players.
 
-If a legacy SF player is not fully compatible with legacy SF2.04, then SFe files might not load at all.
+If a legacy SF player is not fully compatible with legacy SF2.04, then SFE files might not load at all.
 
 ### 10.1.2 INFO chunk and legacy compatibility
 
-SFe files that use 32-bit chunk headers should be as compliant with the legacy standard as possible. `SFSPEC24.PDF` tells implementations to ignore additional sub-chunks in the `INFO-list` chunk, therefore it is possible to use the `INFO-list` chunk for additional data related to SFe.
+SFE files that use 32-bit chunk headers should be as compliant with the legacy standard as possible. `SFSPEC24.PDF` tells implementations to ignore additional sub-chunks in the `INFO-list` chunk, therefore it is possible to use the `INFO-list` chunk for additional data related to SFE.
 
-If SFe files that use 32-bit chunk headers cannot be loaded on legacy sound cards, then something has gone wrong.
+If SFE files that use 32-bit chunk headers cannot be loaded on legacy sound cards, then something has gone wrong.
 
-SFe 4 does not support increased maximum length changes due to backward compatibility concerns.
+SFE 4 does not support increased maximum length changes due to backward compatibility concerns.
 
 ### 10.1.3 phdr sub-chunk
 
@@ -30,11 +30,11 @@ Byte 7 of `byBankLSB` is reserved and should be preserved as read, and written a
 
 Some legacy SF2.0x players include quirks which are automatically loaded for all legacy SF banks. For example, a player may include bank translation when a reset is detected, to support standards that require the use of both bank select MSB and LSB, or may include changes to the modulator implementation to improve sound quality.
 
-If an SFe bank uses an `isng` value of `SFe 4`, then programs must disable implementation quirks that were used with legacy SoundFonts. When converting legacy SoundFonts to SFe banks, programs must take implementation quirks that were used with legacy SoundFonts and translate them into the equivalent functions in SFe (if implemented) to the maximum extent possible. (since 4.0.11)
+If an SFE bank uses an `isng` value of `SFE 4`, then programs must disable implementation quirks that were used with legacy SoundFonts. When converting legacy SoundFonts to SFE banks, programs must take implementation quirks that were used with legacy SoundFonts and translate them into the equivalent functions in SFE (if implemented) to the maximum extent possible. (since 4.0.11)
 
 ### 10.1.5 Generators and modulators
 
-In case of compatibility issues, the `shAmount` and `wAmount` options have been kept in for SFe 4. They may be removed in future versions of SFe.
+In case of compatibility issues, the `shAmount` and `wAmount` options have been kept in for SFE 4. They may be removed in future versions of SFE.
 
 If the `iver` value is below `2.1024`, and the `isng` value is equal to `EMU8000` or another E-mu sound engine:
 
@@ -45,14 +45,14 @@ If the `iver` value is below `2.1024`, and the `isng` value is equal to `EMU8000
 
 If the `iver` value is `2.04` or below, ignore the whole modulator structure if a reserved source type is found.
 
-While default modulators 1-4 are not used in SFe 4.0, SFe programs must still use them for older versions. (since 4.0.21)
+While default modulators 1-4 are not used in SFE 4.0, SFE programs must still use them for older versions. (since 4.0.21)
 
 - If the `iver` value is `2.04`, use the SF2.04 version of the Default Modulator 2 (optional).
 - If the `iver` value is `2.01`, use the SF2.01 version of the Default Modulator 2 (optional).
 - If the `isng` value is `EMU8000`, trigger legacy sound card mode.
-- If the `isng` value is `E-mu 10K1`, `E-mu 10K2`, `X-Fi`, or `SFe 4`, do not trigger legacy sound card mode.
+- If the `isng` value is `E-mu 10K1`, `E-mu 10K2`, `X-Fi`, or `SFE 4`, do not trigger legacy sound card mode.
 
-In SFe 4.0, programs should not define their own default modulators. This can cause playback issues if a SFe bank is used with a player that uses a different default modulator configuration to that of the editing software used.
+In SFE 4.0, programs should not define their own default modulators. This can cause playback issues if a SFE bank is used with a player that uses a different default modulator configuration to that of the editing software used.
 
 Parameter units remain the same as SF2.04.
 
@@ -62,7 +62,7 @@ Legacy SF players may halt on undefined chunks. Section 10.2 of `SFSPEC21.PDF` a
 
 Legacy SF players may halt on unknown enums, which goes against the legacy SF2.04 specification. However, at least some legacy sound cards do not error out on an unknown enum.
 
-The base preset fallback implementation in section 8.8 is designed to work with almost any `byBankMSB` and `byBankLSB` structure, including missing presets. However, this implementation may be too complicated, and players compatible with SFe 4.0 levels 1 to 3 may use a simpler system to implement base preset fallback. (since 4.0.3)
+The base preset fallback implementation in section 8.8 is designed to work with almost any `byBankMSB` and `byBankLSB` structure, including missing presets. However, this implementation may be too complicated, and players compatible with SFE 4.0 levels 1 to 3 may use a simpler system to implement base preset fallback. (since 4.0.3)
 
 ### 10.1.7 xdta-list sub-chunk (since 4.0.16)
 
@@ -74,21 +74,21 @@ Software may copy `pdta-list` values into `xdta-list`, but values must be handle
 
 ## 10.2 Sample compatibility
 
-### 10.2.1 SFe Compression and uncompressed containerised mode (since 4.0.9)
+### 10.2.1 SFE Compression and uncompressed containerised mode (since 4.0.9)
 
-Support for the uncompressed containerised mode is a requirement for SFe Compression compatibility, because it uses the same features as SFe Compression except uncompressed samples instead of compressed ones.
+Support for the uncompressed containerised mode is a requirement for SFE Compression compatibility, because it uses the same features as SFE Compression except uncompressed samples instead of compressed ones.
 
 If a player doesn't support certain sample parameters that it finds inside the container, then it should attempt to play back the sample with the highest quality that is possible.
 
-While the legacy Werner SF3 method of combining compressed and uncompressed samples is deprecated, support for this method is required for SFe Compression compatibility to ensure that all Werner SF3 banks work properly. Official support for non-containerised samples will be removed in a future SFe version, but can be kept in to ensure compatibility with legacy SF2.0x.
+While the legacy Werner SF3 method of combining compressed and uncompressed samples is deprecated, support for this method is required for SFE Compression compatibility to ensure that all Werner SF3 banks work properly. Official support for non-containerised samples will be removed in a future SFE version, but can be kept in to ensure compatibility with legacy SF2.0x.
 
 ### 10.2.2 Legacy sdta structure modes (since 4.0.8)
 
 All players must implement legacy 16-bit mode.
 
-While legacy 24-bit mode support is optional, we recommend that if you implement 24-bit support for uncompressed containerised mode, then non-containerised 24-bit mode is implemented to ensure compatibility with legacy SF2.04 banks. This ensures that a player's 24-bit support is not limited to just SFe banks. This does not include SFe-only players, which are not currently permitted. (since 4.0.9)
+While legacy 24-bit mode support is optional, we recommend that if you implement 24-bit support for uncompressed containerised mode, then non-containerised 24-bit mode is implemented to ensure compatibility with legacy SF2.04 banks. This ensures that a player's 24-bit support is not limited to just SFE banks. This does not include SFE-only players, which are not currently permitted. (since 4.0.9)
 
-Support for legacy structure modes is deprecated and will be removed in a future SFe version. SFe editors must save SFe files in a containerised format, and SFe converters must output a bank in a containerised format. (since 4.0.10)
+Support for legacy structure modes is deprecated and will be removed in a future SFE version. SFE editors must save SFE files in a containerised format, and SFE converters must output a bank in a containerised format. (since 4.0.10)
 
 ### 10.2.3 ROM samples
 

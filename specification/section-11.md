@@ -2,9 +2,9 @@
 
 ## 11.1 Program compatibility levels
 
-These are guidelines to help SFe program developers write their programs. Not all of them need to be followed, but doing so will ensure that your program works with all SFe 4.0 banks.
+These are guidelines to help SFE program developers write their programs. Not all of them need to be followed, but doing so will ensure that your program works with all SFE 4.0 banks.
 
-All SFe programs must meet level 1 requirements. If they do not, guarantees that an SFe file will work on the program can not be made.
+All SFE programs must meet level 1 requirements. If they do not, guarantees that an SFE file will work on the program can not be made.
 
 Level 1 is the level that embedded applications should be expected to include. Level 2 is the minimum 32-bit level for computers. Level 3 is the recommended 64-bit level for a good experience. Level 4 is maxed out. Requirements for levels 1-4 will increase with new versions.
 
@@ -21,8 +21,8 @@ If an implementation is unable to reach the layering requirements without crashi
 | **Multiple files**                                 | Optional                                                                                                | 8 or more                                                                                            | 256 or more                                                                                          | No limit                                                                                             |
 | **Legacy support**                                 | Full quality: SF2.01 and Werner SF3 <br>Playback: SF2.04                                                | Full quality: SF2.01 and Werner SF3 <br>Playback: SF2.04                                             | Full quality: SF2.01, SF2.04 and Werner SF3                                                          | Full quality: SF2.01, SF2.04 and Werner SF3                                                          |
 | **Header support** (since 4.0.5)                   | 32-bit static                                                                                           | 32-bit static                                                                                        | 32-bit static, 64-bit static                                                                         | 32-bit static, 64-bit static                                                                         |
-| **Sample containers** (since 4.0.9)                | SFe Compression/UCC  <br>Uncompressed, OGG  <br>Incompatible formats forbidden for write                | SFe Compression/UCC  <br>Uncompressed, OGG  <br>Incompatible formats forbidden for write             | SFe Compression/UCC  <br>Uncompressed, OGG  <br>Incompatible formats forbidden for write             | SFe Compression/UCC  <br>Uncompressed, OGG, OPUS, FLAC  <br>Incompatible formats forbidden for write |
-| **File extension**                                 | SFe: `.sf4` <br>SF2.0x: `.sf2`  <br>Werner SF3: `.sf3`  <br>Any other uncompressed format is allowed    | SFe: `.sf4` <br>SF2.0x: `.sf2`  <br>Werner SF3: `.sf3`  <br>Any other uncompressed format is allowed | SFe: `.sf4` <br>SF2.0x: `.sf2`  <br>Werner SF3: `.sf3`  <br>Any other uncompressed format is allowed | SFe: `.sf4` <br>SF2.0x: `.sf2`  <br>Werner SF3: `.sf3`  <br>Any other uncompressed format is allowed |
+| **Sample containers** (since 4.0.9)                | SFE Compression/UCC  <br>Uncompressed, OGG  <br>Incompatible formats forbidden for write                | SFE Compression/UCC  <br>Uncompressed, OGG  <br>Incompatible formats forbidden for write             | SFE Compression/UCC  <br>Uncompressed, OGG  <br>Incompatible formats forbidden for write             | SFE Compression/UCC  <br>Uncompressed, OGG, OPUS, FLAC  <br>Incompatible formats forbidden for write |
+| **File extension**                                 | SFE: `.sf4` <br>SF2.0x: `.sf2`  <br>Werner SF3: `.sf3`  <br>Any other uncompressed format is allowed    | SFE: `.sf4` <br>SF2.0x: `.sf2`  <br>Werner SF3: `.sf3`  <br>Any other uncompressed format is allowed | SFE: `.sf4` <br>SF2.0x: `.sf2`  <br>Werner SF3: `.sf3`  <br>Any other uncompressed format is allowed | SFE: `.sf4` <br>SF2.0x: `.sf2`  <br>Werner SF3: `.sf3`  <br>Any other uncompressed format is allowed |
 | **Information/Metadata**                           | New chunks, feature flags                                                                               | New chunks, feature flags                                                                            | New chunks, feature flags                                                                            | New chunks, feature flags                                                                            |
 
 \*Or platform limit, whichever is less. (since 4.0.29) 
@@ -36,7 +36,7 @@ If an implementation is unable to reach the layering requirements without crashi
 | **8-bit samples**                               | Optional                                                  | Optional                                                  | Optional                                                  | Mandatory                                                 |
 | **Maximum individual sample length**            | 16,777,216 samples or greater                             | 4,294,967,296 samples or greater                          | 4,294,967,296 samples or greater                          | Based on chunk header type                                |
 | **Loop point sets**                             | 1                                                         | 1                                                         | 1                                                         | 1                                                         |
-| **Sample linking** (since 4.0.5)                | Mono, Left/Right <br>Includes SFe Compression             | Mono, Left/Right, "Link"  <br>Includes SFe Compression    | Mono, Left/Right, "Link"  <br>Includes SFe Compression    | Mono, Left/Right, "Link"  <br>Includes SFe Compression    |
+| **Sample linking** (since 4.0.5)                | Mono, Left/Right <br>Includes SFE Compression             | Mono, Left/Right, "Link"  <br>Includes SFE Compression    | Mono, Left/Right, "Link"  <br>Includes SFE Compression    | Mono, Left/Right, "Link"  <br>Includes SFE Compression    |
 | **Number of channels**                          | Mono, Stereo\*                                            | Mono, Stereo\*                                            | Mono, Stereo\*                                            | Mono, Stereo\*                                            |
 | **Sample name length**                          | Display 8 characters  <br>Write 20 characters             | Display 20 characters  <br>Write 20 characters            | Display 20 characters  <br>Write 20 characters            | Display 20 characters  <br>Write 20 characters            |
 | **Sample compression algorithms** (since 4.0.5) | WAV, OGG                                                  | WAV, OGG, FLAC                                            | WAV, OGG, OPUS, FLAC                                      | WAV, OGG, OPUS, FLAC                                      |
@@ -85,29 +85,29 @@ If an implementation is unable to reach the layering requirements without crashi
 | **Number of channels**                                                                                                                     | 16 or greater                                                          | 16 or greater                                                            | 64 or greater                                                            | No limit                                                     |
 | **ROM emulator** (since 4.0.5)                                                                                                             | ROM sample support or emulator optional                                | ROM sample support or emulator optional                                  | ROM sample support or emulator optional                                  | ROM sample support or emulator optional                      |
 
-## 11.2 Converting between legacy SF and SFe
+## 11.2 Converting between legacy SF and SFE
 
-### 11.2.1 Conversion from legacy SF2.04 to SFe
+### 11.2.1 Conversion from legacy SF2.04 to SFE
 
 - Upgrade the `ifil` version in the header from `wMajor=2`, `wMinor=4` to `wMajor=2`, `wMinor=1024`.
-- Overwrite the `isng` value with `SFe 4`. (since 4.0.11)
-- Create an `ISFe-list` sub-chunk with information: `SFty = "SFe standard"`, `SFvx = 4, 0, Final, 0, "4.0u12"`, `flag` corresponding to features used in the bank. (since 4.0.12)
+- Overwrite the `isng` value with `SFE 4`. (since 4.0.11)
+- Create an `ISFe-list` sub-chunk with information: `SFty = "SFE standard"`, `SFvx = 4, 0, Final, 0, "4.0u12"`, `flag` corresponding to features used in the bank. (since 4.0.12)
 - Automatically modify the bank to take into account any of the program's implementation quirks (if applicable). (since 4.0.11)
 
-### 11.2.2 Conversion from SFe to legacy SF2.04
+### 11.2.2 Conversion from SFE to legacy SF2.04
 
 - Downgrade the `ifil` version in the header from `wMajor=2`, `wMinor=1024` to `wMajor=2`, `wMinor=4`.
 - Overwrite the `isng` value with `X-Fi`.
-- Decompress/de-containerise the samples if the bank uses SFe Compression.
+- Decompress/de-containerise the samples if the bank uses SFE Compression.
 - Convert the sdta structure to legacy 24-bit.
 - If the first 8 bits of either `wPreset` or `wBank` are identical to another patch, keep only the patch with bits 9-16 clear. If this is not found, keep only the last of the patches in the record. Clear bits 9-16 of all patches afterward.
 - Remove the `ISFe-list` sub-chunk.
 
-### 11.2.3 Conversion from SFe to legacy SF2.01
+### 11.2.3 Conversion from SFE to legacy SF2.01
 
 - Downgrade the `ifil` version in the header from `wMajor=2`, `wMinor=1024` to `wMajor=2`, `wMinor=1`.
 - Overwrite the `isng` value with `EMU8000` or `E-mu 10K1`.
-- Decompress/de-containerise the samples if the bank uses SFe Compression.
+- Decompress/de-containerise the samples if the bank uses SFE Compression.
 - Convert the sdta structure to legacy 16-bit.
 - If the first 8 bits of either `wPreset` or `wBank` are identical to another patch, keep only the patch with bits 9-16 clear. If this is not found, keep only the last of the patches in the record. Clear bits 9-16 of all patches afterward.
 - Remove the `ISFe-list` sub-chunk.
@@ -134,9 +134,9 @@ If an implementation is unable to reach the layering requirements without crashi
 
 #### ifil sub-chunk errors
 
-To fix `ifil` sub-chunk errors, file repair programs must determine the correct version number of the SFe program by inspecting the file structure. File repair programs should never simply add the current SFe specification version, as that can cause a non-critical error relating to an ifil version mismatch due to the specification version being written in `ISFe-list` (`SFvx`) and not `ifil`.
+To fix `ifil` sub-chunk errors, file repair programs must determine the correct version number of the SFE program by inspecting the file structure. File repair programs should never simply add the current SFE specification version, as that can cause a non-critical error relating to an ifil version mismatch due to the specification version being written in `ISFe-list` (`SFvx`) and not `ifil`.
 
-If the file is too damaged to determine the correct `ifil` version, then the repair program should repair these problems first. If, after this, a definitive SF version cannot be determined, the user should be given the option to manually enter a new SF file version. The correct data in `ISFe-list` should also be included if the file is an SFe bank.
+If the file is too damaged to determine the correct `ifil` version, then the repair program should repair these problems first. If, after this, a definitive SF version cannot be determined, the user should be given the option to manually enter a new SF file version. The correct data in `ISFe-list` should also be included if the file is an SFE bank.
 
 Alternatively, file repair programs can allow the user to manually enter the SF file version without allowing the program to automatically determine the necessary version.
 
@@ -220,7 +220,7 @@ Unknown sub-chunk errors can easily be fixed; the unknown sub-chunks are simply 
 
 #### Compressed sample errors
 
-In SFe Compression, all PCM samples must go before compressed samples. This is fixed by rearranging the sample data in the `smpl` chunk, and then updating the `shdr` sub-chunk.
+In SFE Compression, all PCM samples must go before compressed samples. This is fixed by rearranging the sample data in the `smpl` chunk, and then updating the `shdr` sub-chunk.
 
 #### ckSize errors
 
@@ -238,7 +238,7 @@ TSC-related errors are corrected by rearranging the chunks.
 
 #### isng sub-chunk errors
 
-In the case of a missing `isng` sub-chunk, a value of `SFe 4` should be written.
+In the case of a missing `isng` sub-chunk, a value of `SFE 4` should be written.
 
 If it doesn't end in a zero-valued byte, then add a zero-valued byte and warn the user to verify if the value is correct.
 
@@ -262,7 +262,7 @@ Missing sub-chunks should not be filled in unless there are ROM samples that are
 
 #### PHDR sub-chunk errors
 
-Any `dwLibrary`, `dwGenre` or `dwMorphology` value should be cleared because current versions of SFe do not implement this yet. Presets without any zones should be given a zone named `Empty preset` or similar.
+Any `dwLibrary`, `dwGenre` or `dwMorphology` value should be cleared because current versions of SFE do not implement this yet. Presets without any zones should be given a zone named `Empty preset` or similar.
 
 #### PBAG sub-chunk errors
 
@@ -320,11 +320,11 @@ The `ISFe-list` sub-chunk can be repaired, however information in the `ISFe-list
 
 #### ifil chunk errors
 
-If features or feature flags from a newer `ifil` or `SFvx` version of SFe are found on a bank with an older declared version of `SFvx`, then the version should be updated to the detected version of `SFvx`.
+If features or feature flags from a newer `ifil` or `SFvx` version of SFE are found on a bank with an older declared version of `SFvx`, then the version should be updated to the detected version of `SFvx`.
 
 #### Incompatible compression errors
 
-If an incompatible compression format is supported by the SFe program, then it should be decompressed and automatically recompressed into a lossless format using SFe Compression. (since 4.0.2)
+If an incompatible compression format is supported by the SFE program, then it should be decompressed and automatically recompressed into a lossless format using SFE Compression. (since 4.0.2)
 
 #### wPreset value errors
 
@@ -336,7 +336,7 @@ Duplicated preset locations should be highlighted, and the user should have the 
 
 #### File size limit errors
 
-32-bit static headers and structures can be replaced with 64-bit counterparts if the file size was found to exceed 4 GiB. Alternatively, if TSC mode is supported by the SFe program, then it can be activated by moving the sdta-info chunk to the end and setting the correct feature flag in the `ISFe-list` sub-chunk.
+32-bit static headers and structures can be replaced with 64-bit counterparts if the file size was found to exceed 4 GiB. Alternatively, if TSC mode is supported by the SFE program, then it can be activated by moving the sdta-info chunk to the end and setting the correct feature flag in the `ISFe-list` sub-chunk.
 
 #### Feature flag errors
 
@@ -344,9 +344,9 @@ Feature flags can be updated to accurately reflect the features that the bank us
 
 ### 11.4.3 Manual repair
 
-Manual repair is used to completely fix a broken SFe bank. It can be partially automated, however some parts of manual repair are not automatable, and the parts that aren't automatable are highlighted.
+Manual repair is used to completely fix a broken SFE bank. It can be partially automated, however some parts of manual repair are not automatable, and the parts that aren't automatable are highlighted.
 
-Manual repair is intended to be part of SFe bank development tools such as SFe editors or dedicated file repair programs. It is also suitable for situations where control over the repair process by the user is required. However, it is not suitable for SF players.
+Manual repair is intended to be part of SFE bank development tools such as SFE editors or dedicated file repair programs. It is also suitable for situations where control over the repair process by the user is required. However, it is not suitable for SF players.
 
 Manual repair can be used to repair all Structurally Unsound errors and non-critical errors listed in section 11.4. This is the main advantage that it holds over automatic repair.
 
@@ -354,11 +354,11 @@ You can use it to fix a corrupted bank. A manual repair program is very useful i
 
 ### 11.4.4 Automatic repair
 
-Automatic repair allows SFe players to play some "Structurally Unsound" banks by automatically repairing them at load time. It consists of a partial file repair program built directly into the SFe player. With future versions of this specification, SFe players that only support a higher version of the format will also gain the ability to translate old banks to run properly.
+Automatic repair allows SFE players to play some "Structurally Unsound" banks by automatically repairing them at load time. It consists of a partial file repair program built directly into the SFE player. With future versions of this specification, SFE players that only support a higher version of the format will also gain the ability to translate old banks to run properly.
 
-Automatic repair is intended to be part of SFe players. It is an aid to help SFe players play banks that are otherwise "Structurally Unsound". It is not a substitute for repairing the bank using file repair programs. File repair programs should always include an option to use manual repair.
+Automatic repair is intended to be part of SFE players. It is an aid to help SFE players play banks that are otherwise "Structurally Unsound". It is not a substitute for repairing the bank using file repair programs. File repair programs should always include an option to use manual repair.
 
-Automatic repair fixes structural defects in SFe and legacy SF2.04 banks seamlessly and transparently. It should automatically repair all Structurally Unsound errors listed in section 11.4.1 except for compressed sample errors and anything that requires user input.
+Automatic repair fixes structural defects in SFE and legacy SF2.04 banks seamlessly and transparently. It should automatically repair all Structurally Unsound errors listed in section 11.4.1 except for compressed sample errors and anything that requires user input.
 
 It should also repair all non-critical errors listed in section 11.4.2 except for compression errors, `wPreset` value errors, file size limit errors and anything that requires user input. The repair of incompatible compression errors is optional and contingent on support for such formats. (since 4.0.2)
 
@@ -366,27 +366,27 @@ The program developers are allowed to use any repair strategy listed in section 
 
 Automatic repair requires that the implementation give a message when invoked. This is to encourage bank developers not to rely on the feature to implicitly define any parameters.
 
-Automatic repair is a great method to fix issues that prevent SF banks from loading correctly, but it can't repair all defects. For example, anything that requires user input is outside the scope of automatic repair, and should be dealt with by a file repair program or SFe editor program instead.
+Automatic repair is a great method to fix issues that prevent SF banks from loading correctly, but it can't repair all defects. For example, anything that requires user input is outside the scope of automatic repair, and should be dealt with by a file repair program or SFE editor program instead.
 
 This feature must also never overwrite files. This is the job of a file repair program. If system memory is low, it is acceptable for automatic repair implementations to create a patched bank in temporary file storage.
 
-You must correctly set up your banks to ensure that they run properly; do not use automatic repair to implicitly define certain parameters. If you do so, then your bank may not run properly on a legacy SF player or an SFe player that doesn't implement automatic repair.
+You must correctly set up your banks to ensure that they run properly; do not use automatic repair to implicitly define certain parameters. If you do so, then your bank may not run properly on a legacy SF player or an SFE player that doesn't implement automatic repair.
 
 ## 11.5 Why these guidelines?
 
 ### 11.5.1 File Size Representation
 
-- SFe is a 32-bit or 64-bit format.
+- SFE is a 32-bit or 64-bit format.
 - Incorrect numbers of bits will therefore result in program non-compliance.
 - Signed integers are not useful because a negative file size is impossible.
 - To ensure that file size limits are not arbitrarily "cut in half", signed integers are prohibited.
-- Programs using signed integers to represent file size are therefore not compliant with SFe.
+- Programs using signed integers to represent file size are therefore not compliant with SFE.
 
 ### 11.5.2 File Size Limit
 
-- You should not impose additional file size limits in SFe programs.
-- SFe files that exceed these limits may not play.
-- Because compatibility is not guaranteed, such programs may not be SFe compliant.
+- You should not impose additional file size limits in SFE programs.
+- SFE files that exceed these limits may not play.
+- Because compatibility is not guaranteed, such programs may not be SFE compliant.
 
 ### 11.5.3 Sample Streaming
 
@@ -397,18 +397,18 @@ You must correctly set up your banks to ensure that they run properly; do not us
 ### 11.5.4 Total File Size Limit and Multiple Files
 
 - Always provide space for more than one file.
-- SFe allows flexibility in implementing multiple files.
+- SFE allows flexibility in implementing multiple files.
 - It will be standardised in the future depending on the most popular system.
 - The program specification requires multiple files, to guarantee proper operation of "split bank" files.
 - Not implementing multiple file operation will affect compatibility.
-- Such programs therefore may not be SFe compliant.
+- Such programs therefore may not be SFE compliant.
 
 ### 11.5.5 Legacy Support
 
-- SFe is designed to reconcile incompatible SF extensions.
-- Werner SF3 support is required; the SFe format incorporates Werner SF3 structures (SFe Compression).
-- Programs that cannot recognise Werner SF3 format (SFe Compression) may not be able to open SFe files.
-- 24-bit support is optional, but if 24-bit is unsupported in an SFe player, legacy SF2.04 files must not be rejected.
+- SFE is designed to reconcile incompatible SF extensions.
+- Werner SF3 support is required; the SFE format incorporates Werner SF3 structures (SFE Compression).
+- Programs that cannot recognise Werner SF3 format (SFE Compression) may not be able to open SFE files.
+- 24-bit support is optional, but if 24-bit is unsupported in an SFE player, legacy SF2.04 files must not be rejected.
 - Backward compatibility with legacy SF2.0x is sacrosanct when using 32-bit chunk headers, take care when creating a program.
 - "Synthfont Custom Features" support is not currently included in the specification.
 
@@ -431,9 +431,9 @@ You must correctly set up your banks to ensure that they run properly; do not us
 ### 11.5.8 File Extension, Structure, Information and Metadata
 
 - The file extension is `.sf4`. Chunk headers must be detected.
-- Do not save SFe files with an extension `.sf2`, as it may confuse legacy SF2.0x players. Remember that SFe files are not SoundFonts!
+- Do not save SFE files with an extension `.sf2`, as it may confuse legacy SF2.0x players. Remember that SFE files are not SoundFonts!
 - Use the `ifil` and `SFvx` sub-chunks to determine version, do not use the file extension.
-- For SFe, you must use the prescribed chunk sizes and limits in the specification.
+- For SFE, you must use the prescribed chunk sizes and limits in the specification.
 
 ### 11.5.9 Sample Specifications
 
@@ -441,7 +441,7 @@ You must correctly set up your banks to ensure that they run properly; do not us
 - 88.2kHz is not recommended because it is non-standard.
 - Stray `sdta` sub-chunks must be ignored. Erroring out on extra `sdta` chunks is not compliant with SF2.04.
 - There must not be additional limitations to sample length, besides the file size limits.
-- Sample linking features from legacy SF2.04 must be supported (except SFe Compression).
+- Sample linking features from legacy SF2.04 must be supported (except SFE Compression).
 
 ### 11.5.10 Instrument Specifications
 
@@ -458,21 +458,21 @@ You must correctly set up your banks to ensure that they run properly; do not us
 - A minimum polyphony of 256 notes is in place if possible.
 - The `byBankLSB` percussion toggle is to fix the bank select LSB function.
 - All control changes listed as "mandatory" must be supported.
-- If it is not supported, playback may be severely impacted, resulting in a program that is not SFe compliant.
+- If it is not supported, playback may be severely impacted, resulting in a program that is not SFE compliant.
 - This is already a problem with legacy SF2.0x, as not all SF2 players support modulators.
 - Reset support and multiple simultaneous drum kits might not be required, but it is suggested.
-- 64-channel MIDI file support is suggested, and may be required in the future for SFe.
-- The ROM emulator may be required in the future, as many SFe files will make full use of it.
+- 64-channel MIDI file support is suggested, and may be required in the future for SFE.
+- The ROM emulator may be required in the future, as many SFE files will make full use of it.
 
 ## 11.6 How to test your program with SFSpecTest
 
 ### 11.6.1 What does SFSpecTest do?
 
-By using SFSpecTest by mrbumpy409 ([available here](https://github.com/mrbumpy409/SoundFont-Spec-Test)), you can test your SFe player and determine which feature flags to set.
+By using SFSpecTest by mrbumpy409 ([available here](https://github.com/mrbumpy409/SoundFont-Spec-Test)), you can test your SFE player and determine which feature flags to set.
 
 SFSpecTest was written by the author of GeneralUserGS, one of the most popular legacy SF2.0x banks, and is thus a good benchmark for legacy SF2.04 players.
 
-Because SFe is a superset of legacy SF2.04, it is also a good tool to determine what SF2.04 features your program support, allowing you to set the correct feature flags for your program.
+Because SFE is a superset of legacy SF2.04, it is also a good tool to determine what SF2.04 features your program support, allowing you to set the correct feature flags for your program.
 
 ### 11.6.2 Branch 00 Foundational synthesis engine
 
@@ -500,7 +500,7 @@ In leaf `01:06`, set bit 1 if you pass SFSpecTest test #13 (Velocity to Attenuat
 
 ## 11.7 Courtesy actions
 
-For the benefit of the SFe community, please:
+For the benefit of the SFE community, please:
 
 - share all modifications implemented in a program under this license
 - do not remove the link to the latest version of the specification

@@ -1,8 +1,8 @@
-# Section 6: SFe enumerations and feature flags
+# Section 6: SFE enumerations and feature flags
 
-## 6.1 About SFe enumerations
+## 6.1 About SFE enumerations
 
-SFe 4.0 enumerations are identical to legacy SF2.04, but more enumerations may be defined in the future.
+SFE 4.0 enumerations are identical to legacy SF2.04, but more enumerations may be defined in the future.
 
 Once the enumeration model is changed significantly, we will list all changed modulator and generator enums with a clear explanation of what they do. Equations for timecents will also be included!
 
@@ -286,7 +286,7 @@ Figure 12: The tree structure of the feature flags system.
 - Bit 5 on, bit 6 off: A-law read support only
 - Bit 5 on, bit 6 on: A-law playback support
 
-### 6.2.5 Branch 03 SFe Compression support
+### 6.2.5 Branch 03 SFE Compression support
 
 #### 03:00 Compression flag
 
