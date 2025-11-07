@@ -20,7 +20,7 @@ Our code of conduct is very simple, but please read it before contributing.
 
 ### No objectionable content
 
-**Don't do anything illegal, inappropriate, or otherwise objectionable.** You must never post anything that isn't safe for work, life, and/or violates copyrights and/or other laws.
+**Don't do anything illegal, inappropriate, or otherwise objectionable.** You must never post or create anything that isn't safe for work, life, and/or violates copyrights and/or other laws.
 
 ### No affiliation with Creative
 
@@ -28,11 +28,11 @@ Our code of conduct is very simple, but please read it before contributing.
 
 ### AI Use Policy
 
-**Use of generative AI is acceptable only to understand how something works, and for research.** However, you should not use AI tools to generate publicly facing text, images or code.
+**Use of generative AI (for example GitHub Copilot, ChatGPT, Claude Code, etc.) is acceptable only to understand how something works, and for research.** However, you should not use AI tools to generate publicly facing text, images or code.
 
 ### No feature removal
 
-**To remove a feature from the specification, a suitable reason (for example safety or security) must be provided.** Feature removal without considering these points is considered vandalism. 
+**To remove a feature from the specification, a suitable reason (for example safety or security) must be provided.** Feature removal without considering these points is considered vandalism. Redundancy is not considered a valid reason for the purpose of this rule. 
 
 ### No unsolicited sample requests
 
