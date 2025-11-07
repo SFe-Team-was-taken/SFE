@@ -24,7 +24,7 @@ The goals of the SFE project are to:
 - Add the most requested features by soundfont developers
 - Enable sample libraries that we could never have imagined
 - Create a viable competitor to commercial sample library formats (Kontakt, etc.)
-- Allow intercompatibility between other open source sample library formats (such as SFZ)
+- Allow intercompatibility between SFZ (with sfec) and possibly other open formats
 
 ### Why does the specification not include everything?
 

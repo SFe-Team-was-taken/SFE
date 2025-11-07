@@ -8,7 +8,7 @@ https://sfe-team-was-taken.github.io/SFE/
 
 ### What is SFE?
 
-Like many members of the soundfont community, we are tired of the limitations of the ancient SoundFont format. So, in 2020, we launched the SFE (SF-enhanced) project, to research backwards-compatible improvements and updates to the format.
+Like many members of the soundfont community, we are tired of the limitations of the ancient SoundFont format. So, in 2020, we launched the SFE (SFEnhanced) project, to research backwards-compatible improvements and updates to the format.
 
 To do this, we looked at many features that soundfont creators have requested, and are working on incorporating them into the SFE format.
 
@@ -20,9 +20,9 @@ The goals of the SFE project are to:
 
 - Unite proprietary extensions to the SoundFont format
 - Add the most requested features by soundfont developers
-- Enable sample libraries that we could never have imagined 
+- Enable sample libraries that we could never have imagined
 - Create a viable competitor to commercial sample library formats (Kontakt, etc.)
-- Allow intercompatibility between other open source sample library formats (such as SFZ)
+- Allow intercompatibility between SFZ (with sfec) and possibly other open formats
 
 ### Why does the specification not include everything?
 
