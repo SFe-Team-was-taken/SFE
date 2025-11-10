@@ -6,6 +6,8 @@ hide:
 
 # Code of conduct
 
+### Updated 10 November 2025
+
 Our code of conduct is very simple, but please read it before contributing.
 
 ## Rules
