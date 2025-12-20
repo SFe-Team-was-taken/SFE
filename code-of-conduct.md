@@ -6,7 +6,7 @@ hide:
 
 # Code of conduct
 
-### Updated 10 November 2025
+### Updated 20 December 2025
 
 Our code of conduct is very simple, but please read it before contributing.
 
@@ -51,6 +51,24 @@ Our code of conduct is very simple, but please read it before contributing.
 
 - *Permitted: Let's talk to a soundfont developer about implementing SFE.*
 - *Not permitted: Please contribute samples to my incomplete SFE project so I can release it.*
+
+## Guidelines
+
+These guidelines are not required to be followed, but are included in the code of conduct for reference, and you should definitely follow them anyway. 
+
+Before 20 December 2025, these points were included in the SFE license, but have been moved here for clarity.
+
+### Share your modifications to the spec
+
+**While not required, please share your modifications to the SFE specification under the SFE license.** This ensures that everyone who implements the SFE specification can use them. By doing this, we avoid an "ARIA-specific extension"-like feature issue.
+
+### Link to the latest version of the spec
+
+**When redistributing parts of the SFE specification, please keep the link to the latest version of the specification intact.** While our specification can be freely distributed with any modification made, keeping the link to the latest version of the specification ensures that SFE program developers are provided with the latest updates on features and compatibility, which is helpful for everyone.
+
+### Right to repair
+
+**If you incorporate SFE in hardware, please respect the right to repair.** For any hardware that incorporates the SFE format, we strongly recommend that you provide suitable repair information and that you do not place any arbitrary restrictions on third-party repair of your hardware.
 
 ## Failure to follow these rules
 
