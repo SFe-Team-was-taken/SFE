@@ -7,6 +7,8 @@ The data structure terminology used in SFE 4.0 is broadly the same as legacy SF2
 - Branch - A subdivision of a tree structure containing either sub-branches or leaves that include values.
 - Cognitone SF4 - An incompatible modification to Werner SF3 to allow support for FLAC audio compression. Because it is considered an incompatible compression format, usage is not allowed in SFE. (since 4.0.2)
 - FLAC - A lossless audio compression format commonly used in open-source software. Supported by Werner SF3, but not commonly used for that purpose.
+- int8_t - A signed 8-bit data structure element containing an integer between -128 and +127. Replaces CHAR. (since 4.0.31)
+- int16_t - A signed 16-bit data structure element containing an integer between -32,768 and +32,767. Replaces SHORT. (since 4.0.31)
 - Leaf - A value found in a tree structure at the end of a branch.
 - Lossless compression - Said of a compression format that retains all of its data when compressed. In terms of audio, there is no loss in quality in losslessly compressed audio.
 - Lossy compression - Said of a compression format that does not retain all of its data when compressed. In terms of audio, there is a loss in quality in lossily compressed audio.
@@ -22,12 +24,21 @@ The data structure terminology used in SFE 4.0 is broadly the same as legacy SF2
 - SFE Compression - The compression system based on Werner SF3 that SFE programs should be compliant with.
 - Static RIFF - Any RIFF-type format with a fixed chunk size field width, including RIFF or RIFS. See "RIFF-type format", "RIFF" and "RIFS". (since 4.0.17)
 - Tree structure - A structure consisting of branches and leaves.
+- uint8_t - An unsigned 8-bit data structure element containing an integer between 0 and 255. Replaces BYTE. (since 4.0.31)
+- uint16_t - An unsigned 16-bit data structure element containing an integer between 0 and 65,535. Replaces WORD. (since 4.0.31)
+- uint32_t - An unsigned 32-bit data structure element containing an integer between 0 and 4,294,967,295. Replaces DWORD. (since 4.0.31)
 - Vorbis - A lossy audio compression format commonly used in open-source software. The basic compression format that most Werner SF3 and SFE-compatible software should be expected to implement.
 - Werner SF3 - A small upgrade to SoundFont® 2.04 created by Werner Schweer to allow an open source compression solution for SoundFont® programs. Standardised as SFE Compression.
 
 And these changes:
 
+- BYTE - Legacy term for uint8_t, used in legacy SF2.0x specifications. Replace with uint8_t if possible. (since 4.0.31)
+- CHAR - Legacy term for int8_t, used in legacy SF2.0x specifications. Replace with int8_t if possible. (since 4.0.31)
+- DWORD - Legacy term for uint32_t, used in legacy SF2.0x specifications. Replace with uint32_t if possible. (since 4.0.31)
 - RIFF - The 32-bit static RIFF format used by SoundFont® 2.04 and the unmodified version of the format described by Microsoft in 1991.
+- SHORT - Legacy term for int16_t, used in legacy SF2.0x specifications. Replace with int16_t if possible. (since 4.0.31)
+- WORD - Legacy term for uint16_t, used in legacy SF2.0x specifications. Replace with uint16_t if possible. (since 4.0.31)
+
 
 ## 4.2 Synthesis terminology
 

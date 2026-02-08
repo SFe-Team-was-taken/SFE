@@ -103,15 +103,15 @@ The `ISFe-list` sub-chunk currently contains these sub-chunks as of version 4.0:
 
 - `SFty` chunk (UTF-8 string)
 - `SFvx` chunk (46 bytes)
-    - `wSFESpecMajorVersion` (`WORD`)
-    - `wSFESpecMinorVersion` (`WORD`)
-    - `achSFESpecType[20]` (`CHAR`)
-    - `wSFEDraftMilestone` (`WORD`)
-    - `achSFEFullVersion[20]` (`CHAR`)
+    - `wSFESpecMajorVersion` (`uint16_t`)
+    - `wSFESpecMinorVersion` (`uint16_t`)
+    - `achSFESpecType[20]` (`uint8_t`)
+    - `wSFEDraftMilestone` (`uint16_t`)
+    - `achSFEFullVersion[20]` (`uint8_t`)
 - `flag` chunk (multiple of 6 bytes)
-    - `byBranch` (`BYTE`)
-    - `byLeaf` (`BYTE`)
-    - `dwFlags` (`DWORD`)
+    - `byBranch` (`uint8_t`)
+    - `byLeaf` (`uint8_t`)
+    - `dwFlags` (`uint32_t`)
 
 ### 5.5.3 Changed and removed chunks
 
@@ -244,17 +244,17 @@ The `SFvx` sub-chunk is nested inside the `ISFe-list` sub-chunk. It is required 
 It is always 46 bytes in length, containing data in the structure below:
 
 ```c
-struct SFEExtendedVersion
+struct SfeSfvxSubchunk
 {
-    WORD wSFESpecMajorVersion;
-    WORD wSFESpecMinorVersion;
-    CHAR achSFESpecType[20];
-    WORD wSFEDraftMilestone;
-    CHAR achSFEFullVersion[20];
+    uint16_t wSFESpecMajorVersion;
+    uint16_t wSFESpecMinorVersion;
+    uint8_t achSFESpecType[20];
+    uint16_t wSFEDraftMilestone;
+    uint8_t achSFEFullVersion[20];
 };
 ```
 
-The `WORD` values `wSFESpecMajorVersion` and `wSFESpecMinorVersion` contain the SFE specification version, and are used to differentiate between different SFE versions as the value of `ifil` only changes when the format of the `SFvx` sub-chunk does so.
+The `uint16_t` values `wSFESpecMajorVersion` and `wSFESpecMinorVersion` contain the SFE specification version, and are used to differentiate between different SFE versions as the value of `ifil` only changes when the format of the `SFvx` sub-chunk does so.
 
 The case-sensitive UTF-8 character field `achSFESpecType` contains a specification type in UTF-8. For the purposes of this specification, the defined values are:
 
@@ -265,7 +265,7 @@ The case-sensitive UTF-8 character field `achSFESpecType` contains a specificati
 
 Assume `Final` if contents are unknown.
 
-The `WORD` value `wSFEDraftMilestone` contains the draft specification milestone or release candidate number that a bank was created to. This varies depending on the value of `achSFESpecType`.
+The `uint16_t` value `wSFEDraftMilestone` contains the draft specification milestone or release candidate number that a bank was created to. This varies depending on the value of `achSFESpecType`.
 
 The case-sensitive UTF-8 character field `achSFEFullVersion` contains the full version string of the specification used, for example `4.0.22`.
 
@@ -286,19 +286,19 @@ The `flag` sub-chunk is nested inside the `ISFe-list` sub-chunk. It is required 
 It is always a multiple of 6 bytes in length, and contains at least 2 records (1 feature flag and a record at the end) according to the structure:
 
 ```c
-struct SFEFeatureFlag
+struct SfeFlagSubchunk
 {
-    BYTE byBranch;
-    BYTE byLeaf;
-    DWORD dwFlags;
+    uint8_t byBranch;
+    uint8_t byLeaf;
+    uint32_t dwFlags;
 };
 ```
 
-The `BYTE` value `byBranch` represents the branch of the feature. Branches correspond to types of features.
+The `uint8_t` value `byBranch` represents the branch of the feature. Branches correspond to types of features.
 
-The `BYTE` value `byLeaf` represents the leaf of the feature. Leaves correspond to specific features.
+The `uint8_t` value `byLeaf` represents the leaf of the feature. Leaves correspond to specific features.
 
-The `DWORD` value `dwFlags` represents the feature flags themselves, which represent different parts of the feature. Depending on the `byLeaf` value, it can be a number, a series of bytes, etc.
+The `uint32_t` value `dwFlags` represents the feature flags themselves, which represent different parts of the feature. Depending on the `byLeaf` value, it can be a number, a series of bytes, etc.
 
 A tree value is a combination of a branch value and a leaf value, and is conventionally written in the format `[branch]:[leaf]` with hexadecimal values, for example "feature flag `03:01`" refers to the feature flag with branch number `3` and leaf number `1` (SFE Compression sample compression formats). While the `flag` sub-chunk uses a tree structure, it should be noted that no branch includes sub-branches; the branches only include leaves.
 
@@ -319,11 +319,11 @@ It is always a multiple of 10 bytes in length, and contains at least 2 records (
 ```c
 struct sfModList
 {
-  SFModulator sfModSrcOper;
-  SFGenerator sfModDestOper;
-  SHORT modAmount;
-  SFModulator sfModAmtSrcOper;
-  SFTransform sfModTransOper;
+  sfe_modulator_t sfModSrcOper;
+  sfe_generator_t sfModDestOper;
+  int16_t modAmount;
+  sfe_modulator_t sfModAmtSrcOper;
+  sfe_transform_t sfModTransOper;
 };
 ```
 
@@ -638,7 +638,7 @@ In SFE 4.0, the bank system has been completely overhauled. Please read this sec
 
 #### Using MIDI Control Change #32 (Bank Select LSB)
 
-In legacy SF2.04, the `wBank` field stores the bank that the preset can be found in. Due to a forward-thinking decision by E-mu, it is a `WORD` (16-bit) instead of a `BYTE` (8-bit). This means that it could theoretically store values for both bank select instructions found in MIDI 1.0.
+In legacy SF2.04, the `wBank` field stores the bank that the preset can be found in. Due to a forward-thinking decision by E-mu, it is a `uint16_t` instead of a `uint8_t` (8-bit). This means that it could theoretically store values for both bank select instructions found in MIDI 1.0.
 
 Bank select LSB support is added by using the unused 8 bits of `wBank` according to the figure below. Bits 2–8 of *both* `byBankMSB` and `byBankLSB` are now used to set a bank change.
 
@@ -650,7 +650,7 @@ Figure 8: How the bank select logic differs from legacy SF2.04.
 
 In the above figure, `wBank` has been replaced with `byBankMSB` and `byBankLSB`.
 
-This splits the one `WORD` in legacy SF2.04 into two `BYTE` values, one for each bank. `byBankMSB` goes before `byBankLSB` due to RIFF being a little-endian format. (since 4.0.5)
+This splits the one `uint16_t` in legacy SF2.04 into two `uint8_t` values, one for each bank. `byBankMSB` goes before `byBankLSB` due to RIFF being a little-endian format. (since 4.0.5)
 
 #### Using more than one percussion bank
 
@@ -797,7 +797,7 @@ Therefore, the specification for `sfSampleType` discourages the use of fixed enu
 
 Note that all unused bits are reserved and should not be used by SFE implementations.
 
-### List of valid sfSampleType values (since 4.0.28)
+#### List of valid sfSampleType values (since 4.0.28)
 
 | Value | Name                         | Description                                     |
 |-------|------------------------------|-------------------------------------------------|
@@ -838,3 +838,511 @@ The values in `shdr` are parsed slightly differently in `xdta-list`:
     - `fullIndex = (xdtaWord << 16) | pdtaWord`
 - `sfSampleType` in `xdta-list` is unused.
     - SFE software should write a value of zero.
+
+## 5.9 SFE 4.0 RIFF structure
+
+### 5.9.1 SFE 4.0 RIFF structure information (since 4.0.31)
+
+The C-style structs provided should be in a much easier-to-read format than that provided by the legacy SF2.04 specification, because everything here is written in as structs and not using `RIFF()`, `LIST()`, <xxxx-yyyy>, etc.
+
+There is no "levels 0 through 3" confusion here. We provide actual C-style structs as reference to help the development of SFE compliant software.
+
+Additionally, we have replaced the terms `BYTE`, `WORD`, `DWORD`, `CHAR` and `SHORT` with fixed-width integer type names as available in C99 and later via the `<stdint.h>` header. For more information read the cppreference documentation [here](https://en.cppreference.com/w/c/header/stdint.html).
+
+Instead of building from the top down as in `SFSPEC24.PDF`, we also build from the bottom up to make it clear what everything means.
+
+Legacy variable names will be deprecated and replaced with more descriptive variable names in a future version of the SFE specification.
+
+Because of the variable-sized nature of some structs, this description cannot be directly used in C/C++ code. This is only a conceptual visualisation of the structure of an SFE bank for developer referece.
+
+### 5.9.2 SFE 4 RIFF structure - RIFF-type headers
+
+#### FourCC definition
+
+```c
+typedef struct {
+    uint8_t FourCCValue[4]; // Four-character code (FourCC)
+} fourcc_t;
+```
+
+#### 32-bit static RIFF-type header
+
+```c
+typedef struct {
+    fourcc_t ckID;
+    uint32_t ckSize;
+} RiffChunkHeader;
+```
+
+#### 64-bit static RIFF-type header
+
+```c
+typedef struct {
+    fourcc_t ckID;
+    uint64_t ckSize;
+} RifsChunkHeader;
+```
+
+### 5.9.3 SFE 4 RIFF structure - type definitions
+
+#### Ranges type
+
+```c
+typedef struct {
+    uint8_t byLo;
+    uint8_t byHi;
+} sfe_ranges_type_t;
+```
+
+#### Generator amount type
+
+```c
+typedef union {
+    sfe_ranges_type_t ranges;
+    int16_t shAmount;
+    uint16_t wAmount;
+} sfe_gen_amount_type_t;
+```
+
+#### Sample link type
+
+```c
+typedef enum {
+    monoSample = 1,
+    rightSample = 2,
+    leftSample = 4,
+    linkedSample = 8,
+    containerMonoSample = 17,
+    containerRightSample = 18,
+    containerLeftSample = 20,
+    containerLinkedSample = 24,
+    RomMonoSample = 32769,
+    RomRightSample = 32770,
+    RomLeftSample = 32772,
+    RomLinkedSample = 32776,
+    RomContainerMonoSample = 32785,
+    RomContainerRightSample = 32786,
+    RomContainerLeftSample = 32788,
+    RomContainerLinkedSample = 32792
+} sfe_sample_link_t;
+```
+
+### 5.9.4 SFE 4 RIFF structure - fourth level
+
+#### Version tag
+
+```c
+typedef struct {
+    uint16_t wMajor;
+    uint16_t wMinor;
+} SfeVersionTag;
+```
+#### Preset header
+
+```c
+typedef struct {
+    uint8_t achPresetName[20];
+    uint16_t wPreset;
+    uint16_t wBank;
+    uint16_t wPresetBagNdx;
+    uint32_t dwLibrary;
+    uint32_t dwGenre;
+    uint32_t dwMorphology;
+} SfePresetHeader;
+```
+
+#### Preset bag
+
+```c
+typedef struct {
+    uint16_t wGenNdx;
+    uint16_t wModNdx;
+} SfePresetBag;
+```
+
+#### Preset modulator list
+
+```c
+typedef struct {
+    sfe_modulator_t sfModSrcOper;
+    sfe_generator_t sfModDestOper;
+    int16_t modAmount;
+    sfe_modulator_t sfModAmtSrcOper;
+    sfe_transform_t sfModTransOper;
+} SfePresetModulatorList;
+```
+
+#### Preset generator list
+
+```c
+typedef struct {
+    sfe_generator_t sfGenOper;
+    sfe_gen_amount_t genAmount;
+} SfePresetGeneratorList;
+```
+
+#### Instrument header
+
+```c
+typedef struct {
+    uint8_t achInstName[20];
+    uint16_t wInstBagNdx;
+} SfeInstrumentHeader;
+```
+
+#### Instrument bag
+
+```c
+typedef struct {
+    uint16_t wInstGenNdx;
+    uint16_t wInstModNdx;
+} SfeInstrumentBag;
+```
+
+#### Instrument modulator list
+
+```c
+typedef struct {
+    sfe_modulator_t sfModSrcOper;
+    sfe_generator_t sfModDestOper;
+    int16_t modAmount;
+    sfe_modulator_t sfModAmtSrcOper;
+    sfe_transform_t sfModTransOper;
+} SfeInstrumentModulatorList;
+```
+
+#### Instrument generator list
+
+```c
+typedef struct {
+    sfe_generator_t sfGenOper;
+    sfe_gen_amount_t genAmount;
+} SfeInstrumentGeneratorList;
+```
+
+#### Sample header
+
+```c
+typedef struct {
+    uint8_t achSampleName[20];
+    uint32_t dwStart;
+    uint32_t dwEnd;
+    uint32_t dwStartloop;
+    uint32_t dwEndloop;
+    uint32_t dwSampleRate;
+    uint8_t byOriginalKey;
+    int8_t chCorrection;
+    uint16_t wSampleLink;
+    sfe_sample_link_t sfSampleType;
+} SfeSampleHeader;
+```
+
+### 5.9.5 SFE 4 RIFF structure - third level
+
+#### ifil sub-chunk
+
+```c
+typedef struct {
+    RiffChunkHeader chunkHeader;
+    SfeVersionTag versionTag;
+} SfeIfilSubchunk;
+```
+
+#### isng sub-chunk
+
+```c
+typedef struct {
+    RiffChunkHeader chunkHeader;
+    uint8_t isngText[]; // variable-length data
+} SfeIsngSubchunk;
+```
+
+#### irom sub-chunk
+
+```c
+typedef struct {
+    RiffChunkHeader chunkHeader;
+    uint8_t iromText[]; // variable-length data
+} SfeIromSubchunk;
+```
+
+#### iver sub-chunk
+
+```c
+typedef struct {
+    RiffChunkHeader chunkHeader;
+    SfeVersionTag versionTag;
+} SfeIverSubchunk;
+```
+
+#### INAM sub-chunk
+
+```c
+typedef struct {
+    RiffChunkHeader chunkHeader;
+    uint8_t inamText[]; // variable-length data
+} SfeInamSubchunk;
+```
+
+#### ICRD sub-chunk
+
+```c
+typedef struct {
+    RiffChunkHeader chunkHeader;
+    uint8_t icrdText[]; // variable-length data
+} SfeIcrdSubchunk;
+```
+
+#### IENG sub-chunk
+
+```c
+typedef struct {
+    RiffChunkHeader chunkHeader;
+    uint8_t iengText[]; // variable-length data
+} SfeIengSubchunk;
+```
+
+#### IPRD sub-chunk
+
+```c
+typedef struct {
+    RiffChunkHeader chunkHeader;
+    uint8_t iprdText[]; // variable-length data
+} SfeIprdSubchunk;
+```
+
+#### ICOP sub-chunk
+
+```c
+typedef struct {
+    RiffChunkHeader chunkHeader;
+    uint8_t icopText[]; // variable-length data
+} SfeIcopSubchunk;
+```
+
+#### ICMT sub-chunk
+
+```c
+typedef struct {
+    RiffChunkHeader chunkHeader;
+    uint8_t icmtText[]; // variable-length data
+} SfeIcmtSubchunk;
+```
+
+#### ISFT sub-chunk
+
+```c
+typedef struct {
+    RiffChunkHeader chunkHeader;
+    uint8_t isftText[]; // variable-length data
+} SfeIsftSubchunk;
+```
+
+#### smpl sub-chunk
+
+```c
+typedef struct {
+    RiffChunkHeader chunkHeader;
+    int16_t sample[]; // variable-length data
+} SfeSampleSubchunk;
+```
+
+#### sm24 sub-chunk
+
+```c
+typedef struct {
+    RiffChunkHeader chunkHeader;
+    uint8_t sample24[]; // variable-length data
+} SfeSample24Subchunk;
+```
+
+#### phdr sub-chunk
+
+```c
+typedef struct {
+    RiffChunkHeader chunkHeader;
+    SfePresetHeader phdrRec[]; // variable-length data
+} SfePhdrSubchunk;
+```
+
+#### pbag sub-chunk
+
+```c
+typedef struct {
+    RiffChunkHeader chunkHeader;
+    SfePresetBag pbagRec[]; // variable-length data
+} SfePbagSubchunk;
+```
+
+#### pmod sub-chunk
+
+```c
+typedef struct {
+    RiffChunkHeader chunkHeader;
+    SfePresetModulatorList phdrRec[]; // variable-length data
+} SfePmodSubchunk;
+```
+
+#### pgen sub-chunk
+
+```c
+typedef struct {
+    RiffChunkHeader chunkHeader;
+    SfePresetGeneratorList pgenRec[]; // variable-length data
+} SfePgenSubchunk;
+```
+
+#### inst sub-chunk
+
+```c
+typedef struct {
+    RiffChunkHeader chunkHeader;
+    SfeInstrumentHeader instRec[]; // variable-length data
+} SfeInstSubchunk;
+```
+
+#### ibag sub-chunk
+
+```c
+typedef struct {
+    RiffChunkHeader chunkHeader;
+    SfeInstrumentBag ibagRec[]; // variable-length data
+} SfeIbagSubchunk;
+```
+
+#### imod sub-chunk
+
+```c
+typedef struct {
+    RiffChunkHeader chunkHeader;
+    SfeInstrumentModulatorList ihdrRec[]; // variable-length data
+} SfeImodSubchunk;
+```
+
+#### igen sub-chunk
+
+```c
+typedef struct {
+    RiffChunkHeader chunkHeader;
+    SfeInstrumentGeneratorList igenRec[]; // variable-length data
+} SfeIgenSubchunk;
+```
+
+#### shdr sub-chunk
+
+```c
+typedef struct {
+    RiffChunkHeader chunkHeader;
+    SfeSampleHeader shdrRec[]; // variable-length data
+} SfeShdrSubchunk;
+```
+
+### 5.9.6 SFE 4 RIFF structure - ISFe sub-chunk
+
+#### SFty sub-chunk
+
+```c
+typedef struct {
+    RiffChunkHeader chunkHeader;
+    uint8_t sftyText[]; // variable-length data
+} SfeSftySubchunk;
+```
+
+#### SFvx sub-chunk
+
+```c
+typedef struct {
+    uint16_t wSFESpecMajorVersion;
+    uint16_t wSFESpecMinorVersion;
+    uint8_t achSFESpecType[20];
+    uint16_t wSFEDraftMilestone;
+    uint8_t achSFESpecType[20];
+} SfeSfvxSubchunk;
+```
+
+#### Feature flag record entry
+
+```c
+typedef struct {
+    uint8_t byBranch;
+    uint8_t byLeaf;
+    uint32_t dwFlags;
+} SfeFeatureFlag;
+```
+
+#### ISFe-list chunk
+
+```c
+typedef struct {
+    RiffChunkHeader listHeader;
+    fourcc_t listFourCC;
+    SfeSftySubchunk sftyChunk;
+    SfeSfvxSubchunk sfvxChunk;
+    SfeFeatureFlag flagRec[];
+} SfeIsfeSubchunk;
+```
+
+
+### 5.9.7 SFE 4 RIFF structure - second level
+
+#### INFO-list chunk
+
+```c
+typedef struct {
+    RiffChunkHeader listHeader;
+    fourcc_t listFourCC;
+    SfeIfilSubchunk ifilChunk;
+    SfeIsngSubchunk isngChunk;
+    SfeInamSubchunk inamChunk;
+    SfeIromSubchunk iromChunk;
+    SfeIverSubchunk iverChunk;
+    SfeIcrdSubchunk icrdChunk;
+    SfeIengSubchunk iengChunk;
+    SfeIprdSubchunk iprdChunk;
+    SfeIcopSubchunk icopChunk;
+    SfeIcmtSubchunk icmtChunk;
+    SfeIsftSubchunk isftChunk;
+    SfeIsfeSubchunk isfeChunk;
+} SfeInfoChunk;
+```
+
+#### sdta-list chunk
+
+```c
+typedef struct {
+    RiffChunkHeader listHeader;
+    fourcc_t listFourCC;
+    SfeSampleSubchunk sample24Chunk;
+    SfeSample24Subchunk sample24Chunk;
+} SfeSdtaChunk;
+```
+
+#### pdta-list chunk
+
+```c
+typedef struct {
+    RiffChunkHeader listHeader;
+    fourcc_t listFourCC;
+    SfePhdrSubchunk phdrChunk;
+    SfePbagSubchunk pbagChunk;
+    SfePmodSubchunk pmodChunk;
+    SfePgenSubchunk pgenChunk;
+    SfeInstSubchunk instChunk;
+    SfeIbagSubchunk ibagChunk;
+    SfeImodSubchunk imodChunk;
+    SfeIgenSubchunk igenChunk;
+    SfeShdrSubchunk shdrChunk;
+} SfePdtaChunk;
+```
+
+### 5.9.8 SFE 4 RIFF structure - root level
+
+```c
+typedef struct {
+    RiffChunkHeader listHeader;
+    fourcc_t listFourCC;
+    SfeInfoChunk infoListChunk;
+    SfeSdtaChunk sdtaListChunk;
+    SfePdtaChunk pdtaListChunk;
+} SfeBankForm;
+```

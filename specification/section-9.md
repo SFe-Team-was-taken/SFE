@@ -14,23 +14,23 @@ Here is the SiliconSFE header format:
 
 ```c
 typedef struct romHdrType{
-    DWORD romRiffHdr;
-    DWORD romByteSize;
-    CHAR romInterleaveIndex;
-    CHAR romRevision[3];
-    CHAR romVer[4];
-    SHORT bankChecksum;
-    SHORT bankChecksum2sComplement;
-    CHAR bankSFEVersion;
-    CHAR bankProduct[16];
-    BYTE bankSampleCompType;
-    CHAR filler1[2];
-    CHAR bankStyle[16];
-    CHAR bankCopyright[80];
-    DWORD romSFEBankStart;
-    DWORD romSineWaveStart;
-    DWORD filler2[124];
-    SHORT sampleSineWave[SINEWAVESIZE];
+    uint32_t romRiffHdr;
+    uint32_t romByteSize;
+    int8_t romInterleaveIndex;
+    int8_t romRevision[3];
+    int8_t romVer[4];
+    int16_t bankChecksum;
+    int16_t bankChecksum2sComplement;
+    int8_t bankSFEVersion;
+    int8_t bankProduct[16];
+    uint8_t bankSampleCompType;
+    int8_t filler1[2];
+    int8_t bankStyle[16];
+    int8_t bankCopyright[80];
+    uint32_t romSFEBankStart;
+    uint32_t romSineWaveStart;
+    uint32_t filler2[124];
+    int16_t sampleSineWave[SINEWAVESIZE];
 } romHdr;
 ```
 
@@ -42,7 +42,7 @@ In the legacy SF2.04 specification, this is named `romRsrc` and was declared by 
 
 ### 9.2.3 romByteSize
 
-This is an UNSIGNED `DWORD` value with the size of the SiliconSFE ROM blob in bytes. It is limited to 4 GiB in SiliconSFE 1.0. Signed integers are prohibited.
+This is a `uint32_t` value with the size of the SiliconSFE ROM blob in bytes. It is limited to 4 GiB in SiliconSFE 1.0. Signed integers are prohibited.
 
 ### 9.2.4 romInterleaveIndex
 
@@ -118,7 +118,7 @@ In the legacy SF2.04 specification, this is named `sineWaveStart`.
 
 ### 9.2.16 sampleSineWave
 
-This contains `SHORT` values that correspond to a sine wave sample.
+This contains `int16_t` values that correspond to a sine wave sample.
 
 In the legacy SF2.04 specification, this is named `sineWave`.
 

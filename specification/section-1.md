@@ -13,6 +13,7 @@ The SFE standard has been created to provide a successor to E-mu Systems®'s Sou
 
 | Revision | Date              | Description                                                                                                                           |
 |----------|-------------------|---------------------------------------------------------------------------------------------------------------------------------------|
+| 4.0.31   | 8 February 2026   | Modernised integer type names <br> Added more structural information in new section 5.9 <br> A few other formatting fixes             |
 | 4.0.30   | 7 November 2025   | Revised capitalisation                                                                                                                |
 | 4.0.29   | 23 October 2025   | Further containerisation clarification <br> Size limits more clear <br> Disclaimer that we do not have a Trello board                 |
 | 4.0.28   | 29 September 2025 | sfSampleType fixes                                                                                                                    |

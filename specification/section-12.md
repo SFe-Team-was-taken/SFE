@@ -5,17 +5,22 @@ This glossary is broadly the same as the glossary in `SFSPEC24.PDF`, with these 
 - Articulation - Modulation of available parameters and usage of extra samples to produce expressive musical notes.
 - AWE64 - The successor to the famous AWE32, adding features such as waveguide synthesis. Used the EMU8000 synthesizer chip, like the preceding AWE32. Available in "Value" or "Gold" versions.
 - Branch - A subdivision of a tree structure containing either sub-branches or leaves that include values.
+- BYTE - Legacy term for uint8_t, used in legacy SF2.0x specifications. Replace with uint8_t if possible. (since 4.0.31)
 - Case-insensitive - Indicates that a UTF-8 character or string treats alphabetic characters of upper or lower case as identical.
 - Case-sensitive - Indicates that a UTF-8 character or string treats alphabetic characters of upper or lower case as distinct.
+- CHAR - Legacy term for int8_t, used in legacy SF2.0x specifications. Replace with int8_t if possible. (since 4.0.31)
 - Cognitone SF4 - An incompatible modification to Werner SF3 to allow support for FLAC audio compression. Because it is considered an incompatible compression format, usage is not allowed in SFE. (since 4.0.2)
 - DAHDSR - Stands for Delay, attack, hold, decay, sustain, release. The six-step envelope system used in SF and SFE.
 - Downloadable - legacy SF2.0x, Werner SF3 or SFE file obtained from the internet. (Old meaning referred to the obsolete ROM system)
+- DWORD - Legacy term for uint32_t, used in legacy SF2.0x specifications. Replace with uint32_t if possible. (since 4.0.31)
 - EMU10K1 - The successor to the EMU8000, designed by E-mu® for the Creative Labs SB Live!.
 - EMU10K2 - An update to the EMU10K1, designed by E-mu® for the Creative Labs SB Audigy.
 - EMU20K1 - The successor to the EMU10K2, designed by E-mu® for the Creative Labs SB X-Fi.
 - EMU20K2 - An update to the EMU20K1, please refer [here](https://en.wikipedia.org/wiki/Sound_Blaster_X-Fi) for information on SB X-Fi cards that include it.
 - FLAC - A lossless audio compression format commonly used in open-source software. Supported by Werner SF3, but not commonly used for that purpose.
 - Hold - The portion of the DAHDSR envelope after the attack portion, but before the decay portion starts.
+- int8_t - A signed 8-bit data structure element containing an integer between -128 and +127. Replaces CHAR. (since 4.0.31)
+- int16_t - A signed 16-bit data structure element containing an integer between -32,768 and +32,767. Replaces SHORT. (since 4.0.31)
 - Leaf - A value found in a tree structure at the end of a branch.
 - Legacy sound card - A Sound Blaster® (or other sound card) that uses a hardware MIDI synthesiser capable of using banks in the SoundFont® format.
 - Lossless compression - Said of a compression format that retains all of its data when compressed. In terms of audio, there is no loss in quality in losslessly compressed audio.
@@ -33,11 +38,16 @@ This glossary is broadly the same as the glossary in `SFSPEC24.PDF`, with these 
 - SFE 4 - This new specification, based on SoundFont® 2.04 and Werner SF3, with a set of new features making it more realistic. Not to be confused with the incompatible Cognitone SF4 file format.
 - SFE-compatible - Indicates files, data, synthesisers, hardware or software that conform to the SFE specification.
 - SFE Compression - The compression system based on Werner SF3 that SFE programs should be compliant with.
+- SHORT - Legacy term for int16_t, used in legacy SF2.0x specifications. Replace with int16_t if possible. (since 4.0.31)
 - Sound Blaster® Live! - The successor to the AWE64, which improved the synthesizer chip to the EMU10K1, supporting modulators.
 - Sound Blaster® Audigy - The successor to the SB Live!, containing the EMU10K2 chip.
 - Sound Blaster® X-Fi - The successor to the SB Audigy, containing the EMU20K1 or EMU20K2 chip. Supports 24-Bit SoundFont® 2 files (2.04).
 - Static RIFF - Any RIFF-type format with a fixed chunk size field width, including RIFF or RIFS. See "RIFF-type format", "RIFF" and "RIFS".
 - Synth - Abbreviation of "Synthesiser," see "Synthesiser" in `SFSPEC24.PDF` for more information.
 - Tree structure - A structure consisting of branches and leaves.
+- uint8_t - An unsigned 8-bit data structure element containing an integer between 0 and 255. Replaces BYTE. (since 4.0.31)
+- uint16_t - An unsigned 16-bit data structure element containing an integer between 0 and 65,535. Replaces WORD. (since 4.0.31)
+- uint32_t - An unsigned 32-bit data structure element containing an integer between 0 and 4,294,967,295. Replaces DWORD. (since 4.0.31)
 - Vorbis - A lossy audio compression format commonly used in open-source software. The basic compression format that most Werner SF3 and SFE-compatible software should be expected to implement.
 - Werner SF3 - A small upgrade to SoundFont® 2.04 created by Werner Schweer to allow an open source compression solution for SoundFont® programs. Standardised as SFE Compression.
+- WORD - Legacy term for uint16_t, used in legacy SF2.0x specifications. Replace with uint16_t if possible. (since 4.0.31)
