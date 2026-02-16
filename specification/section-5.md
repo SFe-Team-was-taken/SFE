@@ -48,7 +48,7 @@ In SFE, there are different chunk header types that are used in the format. Thes
 - 64-bit static (since 4.0.17)
     - This corresponds to RIFS.
     - The FourCC used is `RIFS`.
-    - To prevent loading by incompatible players, the `sfbk` fourcc is replaced with `SFEn` (**SF-en**hanced)
+    - To prevent loading by incompatible players, the `sfbk` fourcc is replaced with `SFen` (**SFen**hanced)
 
 Future versions of SFE may define different chunk header types.
 
@@ -73,7 +73,7 @@ Using this information, it is possible to check for damage to an SF(e) file.
 An SFE 4 file consists of:
 
 - `RIFF` chunk (main chunk) - this changes depending on the chunk header type to be used.
-    - `sfbk` ascii string - use `SFEn` with 64-bit chunk headers
+    - `sfbk` ascii string - use `SFen` with 64-bit chunk headers
     - `LIST`
         - `INFO` ascii string
         - Sub-chunks inside `INFO-list` in legacy SF2.04 - `ifil`, `isng`, etc.
@@ -1037,6 +1037,19 @@ typedef struct {
 } SfeSampleHeader;
 ```
 
+#### Default modulator list (since 4.0.32)
+
+```c
+typedef struct {
+    sfe_modulator_t sfModSrcOper;
+    sfe_generator_t sfModDestOper;
+    int16_t modAmount;
+    sfe_modulator_t sfModAmtSrcOper;
+    sfe_transform_t sfModTransOper;
+} SfeDefaultModulatorList;
+```
+
+
 ### 5.9.5 SFE 4 RIFF structure - third level
 
 #### ifil sub-chunk
@@ -1270,6 +1283,15 @@ typedef struct {
 } SfeFeatureFlag;
 ```
 
+#### DMOD entry (since 4.0.32)
+
+```c
+typedef struct {
+    RiffChunkHeader chunkHeader;
+    SfeDefaultModulatorList dmodRec[]; // variable-length data
+} SfeDmodSubchunk;
+```
+
 #### ISFe-list chunk
 
 ```c
@@ -1279,6 +1301,8 @@ typedef struct {
     SfeSftySubchunk sftyChunk;
     SfeSfvxSubchunk sfvxChunk;
     SfeFeatureFlag flagRec[];
+    SfePdtaChunk xdtaListChunk;
+    SfeDefaultModulatorList dmodRec[]; // Not actually valid C code, representation purposes only
 } SfeIsfeSubchunk;
 ```
 

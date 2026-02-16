@@ -1,6 +1,6 @@
 # SFEnhanced 4 (SFE 4) Specification
 
-## Version 4.0.31
+## Version 4.0.32
 
 ### Copyright notice
 
