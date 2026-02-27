@@ -1,0 +1,8 @@
+@font-face {
+    font-family: 'Unifont EX Mono';
+    src: url("https://stgiga.github.io/UnifontEX/UnifontExMono.woff2")
+}
+
+:root {
+    --md-code-font: 'Unifont EX Mono', monospace;
+}
