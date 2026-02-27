@@ -18,7 +18,7 @@ The feature flags system is split like this:
 
 Feature flags listed as "reserved" must not be used for private use. Branches 240 (`F0`) to 255 (`FF`) are provided for such use.
 
-<img title="Figure 12" src="../figures/figure_12.png" alt="The tree structure of the feature flags system.">
+<img title="Figure 12" src="../../figures/figure_12.png" alt="The tree structure of the feature flags system.">
 
 Figure 12: The tree structure of the feature flags system.
 

@@ -35,7 +35,7 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Build static pages
-        run: mkdocs build
+        run: python -m build
 
       - name: Setup GitHub Pages
         uses: actions/configure-pages@v5

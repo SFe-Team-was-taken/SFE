@@ -32,4 +32,4 @@ To make it more concise, we only highlight the differences between the SFE speci
 
 ### How can I contribute?
 
-Please read [contributing to SFE](contributing.md) and our [Code of Conduct](code-of-conduct.md). Updates to the Code of Conduct are announced [here](https://github.com/SFe-Team-was-taken/SFE/discussions/150).
+Please read [contributing to SFE](../contributing.md) and our [Code of Conduct](../code-of-conduct.md). Updates to the Code of Conduct are announced [here](https://github.com/SFe-Team-was-taken/SFE/discussions/150).
