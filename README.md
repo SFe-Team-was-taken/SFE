@@ -1,4 +1,4 @@
-<img title="Figure 1" src="sfe-logos/sfe4_banner.png" alt="SFE 4 logo banner">
+<img title="Figure 1" src="docs/sfe-logos/sfe4_banner.png" alt="SFE 4 logo banner">
 
 This is the official repository for the SFE specification.
 

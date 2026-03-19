@@ -47,7 +47,7 @@ The SFE standard has been created to provide a successor to E-mu Systems®'s Sou
 | 4.0.1    | 8 February 2025   | A few clarifications                                                                                                                  |
 | 4.0      | 8 February 2025   | Initial release                                                                                                                       |
 
-For draft specification revision history, see [draft revision history.](../draft-revision-history.md)
+For draft specification revision history, see [draft revision history.](../../draft-revision-history.md)
 
 Changes from the previous version of the specification are highlighted.
 

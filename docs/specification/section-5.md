@@ -52,7 +52,7 @@ In SFE, there are different chunk header types that are used in the format. Thes
 
 Future versions of SFE may define different chunk header types.
 
-<img title="Figure 4" src="../figures/figure_4.png" alt="32-bit static versus 64-bit static headers.">
+<img title="Figure 4" src="../../figures/figure_4.png" alt="32-bit static versus 64-bit static headers.">
 
 Figure 4: 32-bit static versus 64-bit static headers.
 
@@ -89,7 +89,7 @@ An SFE 4 file consists of:
 
 Only SFE-specific chunks are listed for brevity. In this section, assume that any non-listed chunk is identical to SF2.04.
 
-<img title="Figure 5" src="../figures/figure_5.png" alt="Legacy SF2.04 vs SFE 4.0 structures.">
+<img title="Figure 5" src="../../figures/figure_5.png" alt="Legacy SF2.04 vs SFE 4.0 structures.">
 
 Figure 5: Legacy SF2.04 vs SFE 4.0 structures.
 
@@ -642,7 +642,7 @@ In legacy SF2.04, the `wBank` field stores the bank that the preset can be found
 
 Bank select LSB support is added by using the unused 8 bits of `wBank` according to the figure below. Bits 2–8 of *both* `byBankMSB` and `byBankLSB` are now used to set a bank change.
 
-<img title="Figure 8" src="../figures/figure_8.png" alt="How the bank select logic differs from legacy SF2.04.">
+<img title="Figure 8" src="../../figures/figure_8.png" alt="How the bank select logic differs from legacy SF2.04.">
 
 Figure 8: How the bank select logic differs from legacy SF2.04.
 
@@ -658,17 +658,17 @@ Legacy SF2.04 allows bank developers to define one bank of percussion kits for u
 
 SFE 4.0 now allows users to set bit 7 with any value for bits 0-6. The result is that there are 128 percussion banks available when using `byBankMSB`, as shown by the figure below.
 
-<img title="Figure 9" src="../figures/figure_9.png" alt="How the percussion bank listing differs from legacy SF2.04.">
+<img title="Figure 9" src="../../figures/figure_9.png" alt="How the percussion bank listing differs from legacy SF2.04.">
 
 Figure 9: How the percussion bank listing differs from legacy SF2.04. When byte 7 is set for `byBankMSB`, `byBankLSB` may also be used. Therefore, a total of 16384 (128×128) banks of percussion kits may be used.
 
 #### Flowchart for correct handling of bank select instructions
 
-<img title="Figure 10" src="../figures/figure_10.png" alt="The flowchart for bank select instructions in legacy SF2.04.">
+<img title="Figure 10" src="../../figures/figure_10.png" alt="The flowchart for bank select instructions in legacy SF2.04.">
 
 Figure 10: The flowchart for bank select instructions in legacy SF2.04.
 
-<img title="Figure 11" src="../figures/figure_11.png" alt="The flowchart for bank select instructions in SFE 4.0.">
+<img title="Figure 11" src="../../figures/figure_11.png" alt="The flowchart for bank select instructions in SFE 4.0.">
 
 Figure 11: The flowchart for bank select instructions in SFE 4.0.
 
