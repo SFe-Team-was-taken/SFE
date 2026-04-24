@@ -36,13 +36,13 @@ typedef struct romHdrType{
 
 ### 9.2.2 romRiffHeader
 
-In SiliconSFE, it is defined as the FourCC used by the chunk header type used by the integrated SF bank, for example `RIFF`, `RIFS`, `RIFD`, etc. (since 4.0.17)
+In SiliconSFE, it is defined as the FourCC used by the chunk header type used by the integrated SF bank, for example `RIFF`, `RIFS`, `RIFD`, `RF64` etc. (since 4.0.17)
 
-In the legacy SF2.04 specification, this is named `romRsrc` and was declared by Creative as "unused". The name in SiliconSFE more accurately describes its usage.
+In the legacy SF2.04 specification, this is named `romRsrc` and was declared by Creative as "unused". The name in SiliconSFE more accurately describes its usage. The reasoning is that `RIFF` stands for `Resource Interchange File Format`.
 
 ### 9.2.3 romByteSize
 
-This is a `uint32_t` value with the size of the SiliconSFE ROM blob in bytes. It is limited to 4 GiB in SiliconSFE 1.0. Signed integers are prohibited.
+This is a `uint32_t` value with the size of the SiliconSFE ROM blob in bytes. It is limited to 4 GiB in SiliconSFE 1.0. (With the exception of TSC/Trailing Sample Chunk and offset adjustments assuming this value is not ignored in favor of the size of the unheadered SFE.) Signed integers and floats are prohibited.
 
 ### 9.2.4 romInterleaveIndex
 
@@ -64,7 +64,7 @@ In the legacy SF2.04 specification, this is named `id` and is erroneously listed
 
 ### 9.2.7 bankChecksum
 
-This stores the `CRC-16(ARC)` checksum of the integrated SF bank.
+This stores the SNES-type (16-bit simple checksum of ALL bytes, in little endian, operating at the 16-bit level) of the whole SiliconSFE file.
 
 In the legacy SF2.04 specification, this is named `checksum`.
 
@@ -90,7 +90,7 @@ In the legacy SF2.04 specification, this is named `product`.
 
 For the purpose of SiliconSFE, this value is `1` if any kind of sample precompensation is used, and `0` otherwise.
 
-In the legacy SF2.04 specification, Creative said that it indicates the type of sample precompensation that is used in the SiliconSF blob.
+In the legacy SF2.04 specification, Creative said that it indicates the type of sample precompensation that is used in the SiliconSF blob, but they do not give a table or list of values.
 
 ### 9.2.12 bankStyle
 
@@ -108,7 +108,7 @@ In the legacy SF2.04 specification, this is named `copyright`.
 
 This stores the location in the SiliconSFE blob where the integrated SF bank starts.
 
-In the legacy SF2.04 specification, this is named `sampleStart`. The name in SiliconSFE more accurately describes its usage.
+In the legacy SF2.04 specification, this is named `sampleStart`. The name in SiliconSFE more accurately describes its usage. The standard is murky, but THIS approach allows SFE banks larger than 16-bit and/or 4GiB to work in the event they are needed and headered right.
 
 ### 9.2.15 romSineWaveStart
 
