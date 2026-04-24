@@ -108,7 +108,7 @@ In the legacy SF2.04 specification, this is named `copyright`.
 
 This stores the location in the SiliconSFE blob where the integrated SF bank starts.
 
-In the legacy SF2.04 specification, this is named `sampleStart`. The name in SiliconSFE more accurately describes its usage. The standard is murky, but THIS approach allows SFE banks larger than 16-bit and/or 4GiB to work in the event they are needed and headered right.
+In the legacy SF2.04 specification, this is named `sampleStart`. The name in SiliconSFE more accurately describes its usage. The Creative standard is murky, but THIS approach allows SFE banks larger than 16-bit and/or 4GiB to work in the event they are needed and headered right. Padding a SiliconSFE bank to fit a round memory chip size is to be done by having the end of the SF bank be the EOF of the SiliconSFE bank, with the area after the 640 bytes of the SiliconSFE header but before the test sine sample (unless there's an intentional gap between the sine sample and the SiliconSF bank, but this can cause confusion) being filled with padding, which because it is a region supposed to be passed over, the contents of it aren't read or checked and do not have to be purely wasted space, though it's still important to be careful if populating it with non-waste content to avoid confusing code.
 
 ### 9.2.15 romSineWaveStart
 
