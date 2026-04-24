@@ -8,7 +8,7 @@ While we are unaware of any shipping products using the SiliconSF system found i
 
 ### 9.2.1 About the header format
 
-The SiliconSFE header format is almost identical to legacy SF2.04, however an explanation is provided here due to poor documentation of SiliconSF.
+The SiliconSFE header format is almost identical to legacy SF2.04 (which due to how SF2.04's 24-bit works, the following SiliconSF(E) values *has* to be prepended to a *full* SF(E) to avoid problems), however an explanation is provided here due to poor documentation of SiliconSF, and in fact this was such a problem that a detailed breakdown was needed. That being said, in the right hands Silicon mode can be quite a big feature.
 
 Here is the SiliconSFE header format:
 
@@ -42,11 +42,11 @@ In the legacy SF2.04 specification, this is named `romRsrc` and was declared by 
 
 ### 9.2.3 romByteSize
 
-This is a `uint32_t` value with the size of the SiliconSFE ROM blob in bytes. It is limited to 4 GiB in SiliconSFE 1.0. (With the exception of TSC/Trailing Sample Chunk and offset adjustments assuming this value is not ignored in favor of the size of the unheadered SFE.) Signed integers and floats are prohibited.
+This is a `uint32_t` value with the size of the SiliconSFE ROM blob in bytes. It is limited to 4 GiB in SiliconSFE 1.0. (With the exception of TSC/Trailing Sample Chunk and offset adjustments assuming this value is not ignored in favor of the size of the unheadered SFE.) Signed integers and floats are prohibited. Interleaving and loading a SiliconSFE as a source for ROM samples is, on paper, capable of lifting this limit even more, in spite of the fact doing this won't be monolithic anymore, though the specification by Creative, *in Silicon's section*  DOES say that multiple banks can be loaded. As such, Silicon banks that are not just one file due to space reasons are not forbidden, and the SiliconSF(E) standard has *multiple* such expansion avenues, such as how it handles interleaving.
 
 ### 9.2.4 romInterleaveIndex
 
-This is used for interleaved ROMs. You can interleave up to 256 ROMs with one SiliconSFE blob.
+This is used for interleaved ROMs. You can interleave up to 256 ROMs with one SiliconSFE blob, or, on paper, interleave 256 blobs to merge SiliconSF(E) natively into a MUCH bigger size by having each chip have a full SiliconSF(E) bank structure (for the most part) and incrementing the `romInterleaveIndex`, because this method of interleaving retains decodable SF(E) data which can be spotted easily, essentially proper multi-part SF(E)s, on top of what is in the SiliconSF(E) header for offsets and sizes, but an "interlaced" type of interleaving where one SiliconSF(E) blob is spread across multiple ICs has the data split up in such a way where the decodability of the SF(E) bank is not complete unless all the pieces exist (as in BitTorrent, and just as "interlaced"). Essentially, if the internal SF(E)'s headers are NOT broken in any given IC, romInterleaveIndex indicates which volume it is, while if it IS broken or nonexistent, it is the interlaced type of interleaving. Of note is that the the section of Creative's SF spec is murky about whether or not a full SF or just its sample chunks are what `sampleStart` is referring to. The problem with that is that A: they state that it works like any other SoundFont system and allows multiple banks, so the Silicon header replacing the SF header does not work, and they then go on to state that 24-bit banks in the circumstance where such a replacement happens *also* don't work, and that firmware should be updated to address this. The safest answer is to follow the comment in the struct saying that `sampleStart` is the start of a proper SF(E) bank, not a sample chunk. But since it is asking for an offset to a bank in this situation, if the interlaced method of interleaving is done, the sample chunk pointer method is the simplest answer, and because trying to combine interpretations of `sampleStart` and `interleaveIndex` can get messy (but on paper are not strictly impossible, and they DO rely on sniffing bank IC contents after the Silicon header), the simplest answer is to treat `interleaveIndex` as if it can net 256x capacity rather than interlacing. Also doing simple parts in the wrong way can trigger the issues of interlaced but badly. So grouping of well-formed data for a 256x boost is safest. Oh and the presence of this field does not forbid *another* SF(E) from loading it as if it were an AWE ROM. Like with the other special elements of SiliconSF(E), it on paper allows another capacity boost (especially if getting both interpretations of `interleaveIndex` and `sampleStart` are also used. Basically, this field is special.
 
 In the legacy SF2.04 specification, this is named `interleaveIndex`.
 
@@ -76,7 +76,7 @@ In the legacy SF2.04 specification, this is named `checksum2sComplement`.
 
 ### 9.2.9 bankSFEVersion
 
-This value should be the same as the `wSFESpecMajorVersion` value in the `SFvx` sub-chunk in SFE, and the same as the `wMajor` value in the `ifil` sub-chunk in non-SFE. For an unknown or other format, this value is `0`.
+This value should be the same as the `wSFESpecMajorVersion` value in the `SFvx` sub-chunk in SFE, and the same as the `wMajor` value in the `ifil` sub-chunk in non-SFE. For an unknown or indeterminate format, this value is `0`.
 
 In the legacy SF2.04 specification, this is named `bankFormat` and was declared by Creative as "unused".
 
@@ -90,17 +90,17 @@ In the legacy SF2.04 specification, this is named `product`.
 
 For the purpose of SiliconSFE, this value is `1` if any kind of sample precompensation is used, and `0` otherwise.
 
-In the legacy SF2.04 specification, Creative said that it indicates the type of sample precompensation that is used in the SiliconSF blob, but they do not give a table or list of values.
+In the legacy SF2.04 specification, Creative said that it indicates the type of sample precompensation that is used in the SiliconSF blob, but they do not give a table or list of values, so handling it in this boolean fashion is done in lieu of the table.
 
 ### 9.2.12 bankStyle
 
-This is a UTF-8 string that describes the musical style of the contents of the integrated SF bank.
+This is a UTF-8 string that describes the musical style of the contents of the integrated SF bank. On paper it could play into SF(E)'s hidden `Genre`, `Library`, and `Morphology` tags, akin to Creative's abandonded category system for their library management program hinted at in the SF2 specification.
 
 In the legacy SF2.04 specification, this is named `style`.
 
 ### 9.2.13 bankCopyright
 
-This is a UTF-8 string that stores copyright information about the SiliconSFE blob.
+This is a UTF-8 string that stores copyright information about the SiliconSFE blob, and is independent of the field in the SF(E) header, which still has to exist because of how 24-bit banks make non-full SF banks in `sampleStart` break (hence why the simplest `interleaveIndex` approach of having it be a 256x capacity boost is the safest).
 
 In the legacy SF2.04 specification, this is named `copyright`.
 
@@ -108,7 +108,7 @@ In the legacy SF2.04 specification, this is named `copyright`.
 
 This stores the location in the SiliconSFE blob where the integrated SF bank starts.
 
-In the legacy SF2.04 specification, this is named `sampleStart`. The name in SiliconSFE more accurately describes its usage. The Creative standard is murky, but THIS approach allows SFE banks larger than 16-bit and/or 4GiB to work in the event they are needed and headered right. Padding a SiliconSFE bank to fit a round memory chip size is to be done by having the end of the SF bank be the EOF of the SiliconSFE bank, with the area after the 640 bytes of the SiliconSFE header but before the test sine sample (unless there's an intentional gap between the sine sample and the SiliconSF bank, but this can cause confusion) being filled with padding, which because it is a region supposed to be passed over, the contents of it aren't read or checked and do not have to be purely wasted space, though it's still important to be careful if populating it with non-waste content to avoid confusing code.
+In the legacy SF2.04 specification, this is named `sampleStart`. The name in SiliconSFE more accurately describes its usage. The Creative standard is murky, but THIS approach allows SFE banks larger than 16-bit and/or 4GiB to work in the event they are needed and headered right. Padding a SiliconSFE bank to fit a round memory chip size is to be done by having the end of the SF bank be the EOF of the SiliconSFE bank, with the area after the 640 bytes of the SiliconSFE header but before the test sine sample (unless there's an intentional gap between the sine sample and the SiliconSF bank, but this can cause confusion, though it on paper can be taken advantage of) being filled with padding, which because it is a region supposed to be passed over, the contents of it aren't read or checked and do not have to be purely wasted space, though it's still important to be careful if populating it with non-waste content to avoid confusing code.
 
 ### 9.2.15 romSineWaveStart
 
