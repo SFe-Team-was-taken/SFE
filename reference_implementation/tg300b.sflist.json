@@ -13,6 +13,14 @@
         },
         {
           "source": {
+            "bank": 128
+          },
+          "destination": {
+            "bank": 0
+          }
+        },
+        {
+          "source": {
             "bank": 256,
             "program": 0
           },
