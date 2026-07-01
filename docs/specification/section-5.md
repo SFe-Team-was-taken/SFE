@@ -331,13 +331,20 @@ The `DMOD` sub-chunk replaces all default modulators at load time, and acts exac
 
 If the `DMOD` sub-chunk is present but without any modulators, then there are no default modulators. The legacy SF2.04 default modulator list is *not* reloaded.
 
-#### Default modulator changes
+#### Default modulator changes (since 4.0.34)
 
 The default modulators list used by SFE 4.0 is similar to that of legacy SF2.04, with these changes:
 
-- Default modulator 2 (MIDI note-on velocity to filter cutoff) is optional.
+- Default modulator 1 (MIDI note-on velocity to initial attenuation) is removed.
+    - This modulator can be used with legacy SF2.0x banks.
+- Default modulator 2 (MIDI note-on velocity to filter cutoff) is removed.
+    - This modulator can be used with legacy SF2.0x banks.
     - The use of the SF2.04 version of default modulator 2 is required.
     - However, you may use the SF2.01 version if a legacy SF2.01 bank is detected.
+- Default modulator 3 (MIDI channel pressure to vibrato LFO pitch depth) is removed. (since 4.0.34)
+    - This modulator can be used with legacy SF2.0x banks.
+- Default modulator 4 (MIDI continuous controller 1 to vibrato LFO pitch depth) is removed.
+    - This modulator can be used with legacy SF2.0x banks.
 - Default modulators 8 (MIDI CC91 to reverb effects send) and 9 (MIDI CC93 to chorus effects send) have an increased amount.
     - Instead of `20.0%`, `100.0%` is used.
     - You may optionally use `20.0%` when loading a legacy SF2.0x bank.

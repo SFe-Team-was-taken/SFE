@@ -194,11 +194,11 @@ Figure 12: The tree structure of the feature flags system.
 - Bit 4: NRPN select LSB: 4 digits
 - Bit 5: NRPN select LSB: 5 digits
 
-#### 01:06 Default modulators (since 4.0.21)
+#### 01:06 Default modulators (since 4.0.34)
 
 - Bit 1: MIDI note on to initial attenuation
-- Bit 2: MIDI note on to filter cutoff
-- Bit 3: MIDI channel pressure to vibrato LFO pitch depth
+- Bit 2: MIDI note on to filter cutoff (only on legacy SF2.0x)
+- Bit 3: MIDI channel pressure to vibrato LFO pitch depth (only on legacy SF2.0x)
 - Bit 4: MIDI CC1 to vibrato LFO pitch depth
 - Bit 5: MIDI CC7 to initial attenuation
 - Bit 6: MIDI CC10 to pan position

@@ -4,7 +4,7 @@ hide:
   - toc
 ---
 
-Copyright © 2020-2025 SFE Team and contributors
+Copyright © 2020-2026 SFE Team and contributors
 
 Permission is granted to use, distribute and modify this specification for any use, provided that:
 

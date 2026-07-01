@@ -13,6 +13,7 @@ The SFE standard has been created to provide a successor to E-mu Systems®'s Sou
 
 | Revision | Date              | Description                                                                                                                           |
 |----------|-------------------|---------------------------------------------------------------------------------------------------------------------------------------|
+| 4.0.34   | 1 July 2026       | Fixed default modulator ambiguities                                                                                                   |
 | 4.0.33   | 19 May 2026       | Added new member information                                                                                                          |
 | 4.0.32   | 16 February 2026  | Fixed missing SFE chunks <br> Fixed some capitalisation                                                                               |
 | 4.0.31   | 8 February 2026   | Modernised integer type names <br> Added more structural information in new section 5.9 <br> A few other formatting fixes             |
