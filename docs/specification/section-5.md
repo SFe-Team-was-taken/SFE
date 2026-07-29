@@ -224,7 +224,7 @@ Read the legacy SF2.04 specification for info on how to use ROM samples.
 
 The ROM emulator should be implemented in SFE programs.
 
-### 5.6.9 SFty sub-chunk
+### 5.6.9 SFty sub-chunk (since 4.0.36)
 
 The `SFty` sub-chunk is nested inside the `ISFe-list` sub-chunk. It is required and contains a case-sensitive UTF-8 string with even length identifying the type of format used in SFE. Its value is used by SFE-compatible players to assist in loading banks by telling the program what variant of SFE to load a bank as. (since 4.0.13)
 
@@ -232,6 +232,7 @@ The defined values of the `SFty` chunk are:
 
 - the 14 bytes representing `SFE standard` as 12 UTF-8 characters followed by two zero bytes. (since 4.0.12)
 - the 22 bytes representing `SFE standard with TSC` as 21 UTF-8 characters followed by one zero byte. (since 4.0.12)
+- the 18 bytes representing `SFE containerised` as 17 UTF-8 characters followed by one zero byte. (since 4.0.36)
 
 The field should not be longer than 22 bytes in SFE 4.0. (since 4.0.12)
 
@@ -505,19 +506,20 @@ The `wMajor` value in the `ifil` sub-chunk is set to 3 instead of 2. The value o
 
 If non-containerised samples are used, then `wMajor` remains 2. (since 4.0.27)
 
+The `SFE containerised` value for `SFty` indicates a containerised bank in SFE and is required with 64-bit chunk headers and recommended with 32-bit chunk headers. (since 4.0.36)
+
 #### sfSampleType in shdr sub-chunk (since 4.0.27)
 
 Bit 5 of the `sfSampleType` field indicates a containerised sample that is not necessarily compressed. This is used to retain backwards compatibility with Werner SF3.
 
 In addition, the "left," "right" and "linked" flags can now be combined with the containerised sample flag.
 
-#### Supported containerisation formats for samples (since 4.0.22)
+#### Supported containerisation formats for samples (since 4.0.36)
 
 Currently, SFE Compression requires any containerised samples to be in these formats:
 
 - wav
 - ogg
-- opus
 - flac
 
 Wav files may be uncompressed or compressed. However, compressed wav files must be in these formats:

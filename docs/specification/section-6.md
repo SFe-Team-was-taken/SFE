@@ -296,9 +296,8 @@ Figure 12: The tree structure of the feature flags system.
 #### 03:01 Sample compression formats
 
 - Bit 1: OGG
-- Bit 2: Opus
-- Bit 3: FLAC
-- Bit 4: WAV (containerised)
+- Bit 2: FLAC
+- Bit 3: WAV (containerised)
 
 ### 6.2.6 Branch 04 Metadata upgrades
 
